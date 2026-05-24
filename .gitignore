@@ -1,0 +1,56 @@
+# Default-deny: only version the small, reviewable Codex configuration files
+# explicitly unignored below.
+*
+
+!.gitignore
+!AGENTS.md
+!config.toml
+!hooks.json
+
+!rules/
+!rules/**
+
+!automations/
+!automations/*/
+!automations/*/automation.toml
+!automations/paper-daily/memory.md
+
+!skills/
+!skills/paper-deep-presentation/
+!skills/paper-deep-presentation/**
+!skills/paper-search-digest/
+!skills/paper-search-digest/**
+
+# Never upload local secrets, identity, runtime state, logs, sessions, caches,
+# generated worktrees, databases, or platform-managed plugin bundles.
+auth.json
+installation_id
+history.jsonl
+session_index.jsonl
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.log
+.codex-global-state.json
+.codex-global-state.json.bak
+.personality_migration
+.tmp/
+archived_sessions/
+cache/
+log/
+logs/
+node_repl/
+pets/
+plugins/
+sessions/
+shell_snapshots/
+sqlite/
+tmp/
+vendor_imports/
+worktrees/
+skills/.system/
+memories/
+automations/.run-jitter-salt
+
+.DS_Store
+**/.DS_Store

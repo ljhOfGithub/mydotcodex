@@ -1,0 +1,10 @@
+version = 1
+id = "outlook"
+kind = "heartbeat"
+name = "每日 Outlook 邮件总结"
+prompt = "每天总结 Outlook 邮箱中最近 24 小时收到的邮件。按优先级输出：1. 需要我回复或处理的邮件；2. 有明确截止日期、会议、账单、申请、审批或承诺的事项；3. 重要信息更新；4. 可忽略的通知或订阅。每条尽量包含发件人、主题、时间、核心内容、建议动作和截止时间。如果没有重要邮件，也简短说明没有需要处理的事项；5. 最后总结每封邮件的内容"
+status = "ACTIVE"
+rrule = "RRULE:FREQ=WEEKLY;BYHOUR=22;BYMINUTE=0;BYDAY=SU,MO,TU,WE,TH,FR,SA"
+target_thread_id = "019e50b6-6d1d-77a3-9fba-b0d448d9546e"
+created_at = 1779470638875
+updated_at = 1779523314918

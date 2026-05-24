@@ -1,0 +1,124 @@
+notify = ["/Users/jackie/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-22T15:57:21Z"
+source_type = "local"
+source = "/Users/jackie/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-23T03:26:03Z"
+source_type = "local"
+source = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."outlook-email@openai-curated"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[projects."/Users/jackie"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/Codex/2026-05-18/1-incom-social-comparison-orientation-scale"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/Codex"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/lcca"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/paper daily"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/research"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/codex 管理"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 1
+
+[features]
+codex_hooks = true
+js_repl = false
+memories = true
+
+[hooks.state]
+
+[hooks.state."/Users/jackie/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:62a9ebf9348d431a99d900911ff85aef92b29fad4c2fe80964c84d51d44fe76c"
+
+[hooks.state."/Users/jackie/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:3a04efa7ae3c8f42adcc6181b3aff5dd9d88c5a0448e9750f7ccd24dc6a2fb4c"
+
+[hooks.state."/Users/jackie/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:6e924076ae706ff81e2b23947be5b4d37377ebb9404923a56cc192443f11885e"
+
+[hooks.state."/Users/jackie/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:d776a1fcd9239a1a20fb3da46e4094b052b92e0abb31c7cbe329a7fe61c41f00"
+
+[hooks.state."/Users/jackie/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:a436e454e17cc544f1c781934f79af4a01ef4bae1cd8e19022bbb61824214a7b"
+
+[hooks.state."/Users/jackie/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:126a4c47deab17586e28342b346b7da18e34d10926ecea7c4f7266c05f57a279"
+
+[desktop]
+ambient-suggestions-enabled = false
+composerEnterBehavior = "enter"
+preventSleepWhileRunning = true
+keepRemoteControlAwakeWhilePluggedIn = true
+conversationDetailMode = "STEPS_COMMANDS"
+followUpQueueMode = "queue"
+
+[desktop.open-in-target-preferences]
+global = "fileManager"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_MARKETPLACE_NAME = "openai-bundled"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+CODEX_HOME = "/Users/jackie/.codex"
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = ""
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/node"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "167fdf579477181fba1773c1efb067b00c5a64fe85dafb50a2001bde198dc739"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex"
+NODE_REPL_UNTRUSTED_ENV_ALLOWLIST = "BROWSER_USE_MARKETPLACE_NAME"
+SKY_CUA_SERVICE_PATH = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/computer-use/Codex Computer Use.app"
+
+[memories]
+generate_memories = true
+use_memories = true
+
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true

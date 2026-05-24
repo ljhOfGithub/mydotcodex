@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Search Digest"
+  short_description: "Search, download, and analyze CS papers"
+  default_prompt: "Use $paper-search-digest to search ten papers about my topic, download available PDFs, and write a deduplicated markdown report."

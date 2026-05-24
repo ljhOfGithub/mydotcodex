@@ -1,0 +1,13 @@
+version = 1
+id = "paper-search-digest-daily"
+kind = "cron"
+name = "paper-search-digest daily"
+prompt = "使用 skill `/Users/jackie/.codex/skills/paper-search-digest/SKILL.md` 执行每日论文检索整理任务。默认中文输出，事实优先，不编造。\n\n目标目录：`/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/reports`\n技能脚本：`/Users/jackie/.codex/skills/paper-search-digest/scripts/search_papers.py`\n报告框架：`/Users/jackie/.codex/skills/paper-search-digest/references/report-framework.md`\n\n每天按以下关键词逐个运行：\n1. `agent system / autonomous agents / web agents`\n2. `edge computing / distributed computing`\n\n对每个关键词：\n- 检索 arXiv / DBLP / OpenAlex 等来源。\n- 筛选范围默认近两年计算机顶会或高相关论文。\n- 默认每个关键词整理最多 5 篇真实新候选；如果去重后少于 5 篇，报告真实数量，不用旧论文凑数。\n- 使用 `search_papers.py` 下载可用 PDF，并依赖 `<reports-dir>/_paper_search_digest/seen_papers.json` 去重。\n- 检索后必须读取候选 JSON；不要只调用脚本就结束。\n- 深读候选论文：优先 PDF，至少阅读 abstract、introduction、method/system design、experiments/evaluation、conclusion；如果只能基于摘要或元数据，必须在报告中标注 `abstract-only` 或 `未在论文或元数据中确认`。\n- 每个关键词生成一份独立 Markdown 报告，写入 `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/reports`，文件名包含当天日期和关键词 slug，例如 `YYYY-MM-DD-agent-system-paper-digest.md`。\n- 如果当天某关键词没有新论文，写一份短 note 到对应 Markdown，说明检索命令、候选数量、去重原因或失败源；不要拿旧结果冒充新结果。\n\n报告必须包含：\n- search metadata：query、field、sources、run date、report path、新候选数量。\n- 入选论文表：title、year、venue/source、links、PDF path、duplicate status。\n- 按 `report-framework.md` 的 7 个部分逐篇回答：Introduction、Background/Motivation/Related Work、System Overview、System Design、Experiment Setup、Evaluation、Discussion。\n- 固定回答模板：`现有方法（如 ___）假设 ___，但实际中 ___ 导致 ___。...`\n- 2 分钟 elevator pitch：`问题 -> 洞察 -> 设计选择 -> 代价`。\n- 横向综合：共同假设、最强洞察、证据薄弱点、最值得继续读的论文。\n\n最后在自动任务回复中列出：\n- 每个关键词的候选数量和入选标题。\n- 每个关键词的 JSON 路径、PDF 目录、Markdown 报告路径。\n- 任何失败源、网络/代理问题、PDF 下载失败或 abstract-only 限制。\n\n禁止：\n- 禁止直接使用关键词模板生成最终报告。\n- 禁止没阅读候选内容就总结。\n- 禁止因为论文命中关键词就给高分。\n- 禁止编造 PDF 或正文中没有的信息。\n- 禁止自动 git push。"
+status = "ACTIVE"
+rrule = "RRULE:FREQ=WEEKLY;BYDAY=SU,MO,TU,WE,TH,FR,SA;BYHOUR=9;BYMINUTE=0"
+model = "gpt-5.4"
+reasoning_effort = "medium"
+execution_environment = "worktree"
+cwds = ["/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily"]
+created_at = 1779615334629
+updated_at = 1779616584645

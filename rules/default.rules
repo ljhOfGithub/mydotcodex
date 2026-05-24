@@ -1,0 +1,19 @@
+prefix_rule(pattern=["curl"], decision="allow")
+prefix_rule(pattern=["python3", "-c", "import urllib.request, ssl; url='https://ucrel.lancs.ac.uk/usas/USASSemanticTagset.pdf'; data=urllib.request.urlopen(url, context=ssl._create_unverified_context(), timeout=30).read(); open('sources/usas_semantic_tagset.pdf','wb').write(data); print(len(data))"], decision="allow")
+prefix_rule(
+    pattern = [
+        "/Users/jackie/Documents/Git/.venv/bin/python",
+        "scripts/daily_papers.py",
+    ],
+    decision = "allow",
+    justification = "paper-daily fetch needs real network access for arXiv and OpenReview.",
+    match = [
+        "/Users/jackie/Documents/Git/.venv/bin/python scripts/daily_papers.py --config config.yaml --date today --stage fetch --force",
+        "/Users/jackie/Documents/Git/.venv/bin/python scripts/daily_papers.py --config config.yaml --date 2026-05-23 --stage fetch --force",
+        "/Users/jackie/Documents/Git/.venv/bin/python scripts/daily_papers.py --config config.yaml --date today --stage fetch --lookback-days 3",
+        "python scripts/daily_papers.py --config config.yaml --date today --stage fetch --force",
+    ],
+    not_match = [
+        "/Users/jackie/Documents/Git/.venv/bin/python other_script.py",
+    ],
+)
