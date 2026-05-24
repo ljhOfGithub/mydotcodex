@@ -16,10 +16,7 @@
 !automations/paper-daily/memory.md
 
 !skills/
-!skills/paper-deep-presentation/
-!skills/paper-deep-presentation/**
-!skills/paper-search-digest/
-!skills/paper-search-digest/**
+!skills/**
 
 # Never upload local secrets, identity, runtime state, logs, sessions, caches,
 # generated worktrees, databases, or platform-managed plugin bundles.

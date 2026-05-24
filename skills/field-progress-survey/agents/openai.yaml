@@ -1,0 +1,4 @@
+interface:
+  display_name: "Field Progress Survey"
+  short_description: "Survey a research field with real papers"
+  default_prompt: "Use $field-progress-survey to investigate the current and historical progress of a research area with real paper citations."

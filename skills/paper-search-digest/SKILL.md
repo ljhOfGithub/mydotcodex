@@ -1,23 +1,22 @@
 ---
 name: paper-search-digest
-description: Search computer science papers from arXiv, DBLP, OpenAlex, and similar public scholarly sources; download available PDFs; deduplicate repeated runs; deeply read papers; and write Chinese Markdown literature reports into a target reports directory. Use when the user provides keywords, fields, venues, authors, date ranges, or a research topic and asks Codex to find papers, download papers, summarize papers, compare related work, prepare a discussion note, create a beginner-friendly deep-reading explanation, prepare a presentation-style paper walkthrough, or answer introduction/background/system/experiment/evaluation/discussion questions.
+description: Search computer science papers from arXiv, DBLP, OpenAlex, and similar public scholarly sources; download available PDFs; deduplicate repeated runs; and by default orchestrate one deep presentation report for every newly found paper by invoking the paper-deep-presentation skill. Use when the user provides keywords, fields, venues, authors, date ranges, or a research topic and asks Codex to find papers, download papers, organize a paper batch, summarize search results, compare related work, or prepare deep per-paper reports.
 ---
 
 # Paper Search Digest
 
-Use this skill to turn a user-provided CS research topic into a reproducible, deduplicated Markdown report with up to ten newly selected papers per run. It also supports single-paper deep-reading reports that explain a paper like a lecture for beginners.
+Use this skill to turn a user-provided CS research topic into a reproducible, deduplicated paper batch. This skill is the search/download/orchestration layer. By default, every newly found paper that is not a duplicate or clearly off-topic must be processed by `/Users/jackie/.codex/skills/paper-deep-presentation/SKILL.md`; do not write rough per-paper explanations from this skill.
 
 ## Workflow
 
 1. Clarify only missing essentials: topic/keywords, field, optional date range, and target report directory. If unspecified, default the report directory to `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/reports`.
 2. Run `scripts/search_papers.py` to query public sources, deduplicate against prior runs, download available PDFs, and write a candidate JSON file.
 3. Inspect the JSON. If there are fewer than ten new papers, report the real count; do not pad with old or irrelevant papers.
-4. Deep-read each selected paper. Prefer PDF text extraction when a PDF was downloaded; otherwise use abstract, DOI/publisher page, arXiv page, DBLP metadata, and official project/code pages.
-5. Choose the report type:
-   - For multi-paper search, digest, related-work, or ranking requests, read `references/report-framework.md`.
-   - For single-paper deep reading, beginner explanation, figure/table walkthrough, or presentation requests, read `references/deep-reading-template.md`.
-6. Write one Markdown report into the reports directory. Use a filename that includes the date and a short topic slug, for example `2026-05-24-edge-iot-paper-digest.md`.
-7. Update nothing else unless the user asked for it. Keep downloaded PDFs and JSON sidecars under the reports directory's `_paper_search_digest/` subfolder.
+4. Build a processing list from all newly found papers in the JSON. Default to processing every new paper returned by the search script. Skip only when a paper is duplicate, clearly off-topic, lacks enough source evidence to identify it, or the user explicitly requested a smaller count. Record the reason for every skip.
+5. For every paper in the processing list with a local PDF path, invoke `/Users/jackie/.codex/skills/paper-deep-presentation/SKILL.md` and pass the local PDF path plus title/source URL. That skill must generate the detailed beginner-friendly presentation report with screenshots under `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports`.
+6. If a paper in the processing list has no downloaded PDF, first try to find an authoritative PDF. If no PDF is available, call `paper-deep-presentation` with the best authoritative URL/title and clearly mark missing PDF evidence in the batch summary.
+7. Write only a lightweight batch index/summary into the reports directory using a non-overwriting filename. Include the date, topic slug, and a run timestamp or suffix, for example `2026-05-24-093012-edge-iot-paper-batch.md`. The batch index should link to each deep presentation report produced by `paper-deep-presentation` and list any skipped papers with reasons.
+8. Update nothing else unless the user asked for it. Keep downloaded PDFs and JSON sidecars under the reports directory's `_paper_search_digest/` subfolder.
 
 ## Search Command
 
@@ -56,9 +55,22 @@ Treat a paper as duplicate if any of these match an existing item:
 
 If the user asks for exactly ten papers but fewer than ten new papers are found, write the truthful count and explain that deduplication reduced the batch.
 
+## Non-Overwrite Rules
+
+Never overwrite previous outputs, especially when this skill runs multiple times on the same day.
+
+- Before writing any report, scored JSON, note, asset directory, or manually downloaded PDF, check whether the target path already exists.
+- If a path exists, create a new path by adding a timestamp (`HHMMSS`) or a numeric suffix (`-run2`, `-run3`).
+- Prefer report names like `YYYY-MM-DD-HHMMSS-topic-paper-digest.md` for repeated runs.
+- Prefer scored JSON names like `YYYY-MM-DD-HHMMSS-topic-scored.json` if writing structured scoring output.
+- Prefer asset directories like `YYYY-MM-DD-HHMMSS-topic_assets/`.
+- Do not rewrite `reports/YYYY-MM-DD.md` or any existing daily report unless the user explicitly asks to replace that exact file.
+- Do not delete older reports, JSON files, PDFs, or asset folders while making room for a new run.
+- In the final reply, include the exact new output paths and mention if a suffix or timestamp was added to avoid overwriting.
+
 ## Reading and Reporting Standards
 
-Do not rely only on title keywords. For each selected paper, identify:
+Do not rely only on title keywords. For each newly found paper, identify enough metadata to decide whether it is valid to process or must be skipped:
 
 - the actual problem and boundary conditions
 - the key observation or insight
@@ -66,31 +78,35 @@ Do not rely only on title keywords. For each selected paper, identify:
 - experiment setup, baselines, metrics, and main limitations
 - trade-offs and deployment or ethics risks when relevant
 
+Keep this identification brief in the batch index. The full explanation, terminology table, experiment walkthrough, screenshots, and presentation script must be produced by `paper-deep-presentation`, not by this skill. Default action is process, not skip.
+
 For arXiv papers, prefer the PDF. For DBLP-only hits, use linked DOI/publisher pages or search the exact title on arXiv/OpenAlex/Semantic Scholar before concluding that a PDF is unavailable.
 
-## Beginner-Friendly Language Standards
+## Terminology Rules
 
-Write reports for a smart beginner unless the user asks for a specialist-only version.
+When writing Chinese reports, do not leave technical English as unexplained shorthand. For `instrument/instrumentation`, `baseline`, `benchmark`, `marker`, `piggyback`, `workload`, and `trace`, explain the concrete action and role in the paper before using the term repeatedly.
 
-- Explain every retained English term in a glossary before using it heavily.
-- On first use, write `中文译名（English term）`; later prefer the Chinese term.
-- Do not leave jargon as bare English when a plain Chinese explanation is needed.
-- Do not use `instrument` as an untranslated Chinese verb.
-- Prefer explicit action-level explanations, for example: `传统快照算法默认所有相关进程都能接入快照协议：它们可以在收发消息时携带快照标记，并在合适时刻记录本地状态`.
-- For terms such as `instrument/instrumentation`, `baseline`, `benchmark`, `marker`, `piggyback`, `workload`, and `trace`, explain what the term means in this paper, what action it performs, and what readers may misunderstand.
-- Mark uncertain details as `未在论文或元数据中确认`; do not fill gaps with generic textbook claims.
+- `instrument/instrumentation`: explain what code hook, protocol change, logging point, message field, or observation mechanism is added.
+- `baseline`: explain which existing method or control group it represents and why it is a fair comparison.
+- `benchmark`: explain the task set, environment, input/output, and scoring protocol.
+- `marker`: explain what tag or signal is attached to a message/state and what it triggers.
+- `piggyback`: explain what extra information is carried along with an existing message and why that avoids an extra round trip.
+- `workload`: explain the concrete requests, jobs, traces, datasets, or traffic pattern used in experiments.
+- `trace`: explain whether it is a request log, execution sequence, network packet record, or model/agent action history.
+
+Do not use `instrument` as an untranslated Chinese verb. Prefer action-level explanations such as: `传统快照算法默认所有相关进程都能接入快照协议：它们可以在收发消息时携带快照标记，并在合适时刻记录本地状态`.
 
 ## Output Contract
 
-For multi-paper digests, the Markdown report must include:
+The batch Markdown report must include:
 
 - search metadata: query, field, sources, run date, report path, and number of new papers
-- a table of selected papers with title, year, venue/source, links, PDF path if available, and duplicate status
-- one subsection per paper answering the framework questions in concise Chinese
-- a cross-paper synthesis: recurring assumptions, strongest ideas, weak evidence, and best follow-up reads
-- the fixed Chinese answer template filled in when enough evidence exists; otherwise mark unknowns explicitly
-- a 2-minute elevator pitch draft: "问题 -> 洞察 -> 设计选择 -> 代价"
+- candidate JSON path and PDF directory
+- a table of processed papers with title, year, venue/source, source link, local PDF path if available, duplicate status, and relevance note
+- a table mapping each processed paper to the Markdown report generated by `paper-deep-presentation`
+- skipped-paper notes for any candidates that were duplicate, clearly off-topic, lacked enough evidence, or were excluded by an explicit user count limit
+- any failures: network/API/PDF download/rendering/deep-report generation errors
 
-For single-paper deep-reading reports, follow `references/deep-reading-template.md`. Include useful figure/table screenshots when available, store them under `<report-stem>_assets/`, and reference them with relative Markdown image links.
+Do not use this skill to generate the full per-paper technical report. If a per-paper report is needed, it must be created by `paper-deep-presentation`.
 
 Do not invent missing details. Mark unavailable evidence as `未在论文或元数据中确认`.
