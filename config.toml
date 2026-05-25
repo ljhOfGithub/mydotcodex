@@ -8,7 +8,7 @@ source_type = "local"
 source = "/Users/jackie/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.openai-bundled]
-last_updated = "2026-05-23T03:26:03Z"
+last_updated = "2026-05-25T05:57:09Z"
 source_type = "local"
 source = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -31,6 +31,9 @@ enabled = true
 enabled = true
 
 [plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
 enabled = true
 
 [projects."/Users/jackie"]
@@ -113,6 +116,61 @@ NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "167fdf579477181fba1773c1efb067b00c5a
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex"
 NODE_REPL_UNTRUSTED_ENV_ALLOWLIST = "BROWSER_USE_MARKETPLACE_NAME"
 SKY_CUA_SERVICE_PATH = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/computer-use/Codex Computer Use.app"
+
+[mcp_servers.llm_for_zotero]
+default_tools_approval_mode = "approve"
+enabled_tools = ["library_search", "library_read", "paper_read", "literature_search", "web_search", "library_update", "collection_update", "note_write", "library_import", "library_delete", "attachment_update", "run_command", "file_io", "zotero_script", "undo_last_action"]
+url = "http://127.0.0.1:23119/llm-for-zotero/mcp"
+
+[mcp_servers.llm_for_zotero.http_headers]
+Authorization = "Bearer 6f79283ed44274f54648a8372c76bca04e83f8e8835a3dbe5ba90799e5c0400c"
+
+[mcp_servers.llm_for_zotero.tools]
+
+[mcp_servers.llm_for_zotero.tools.attachment_update]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.collection_update]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.file_io]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.library_delete]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.library_import]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.library_read]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.library_search]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.library_update]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.literature_search]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.note_write]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.paper_read]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.run_command]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.undo_last_action]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.web_search]
+approval_mode = "approve"
+
+[mcp_servers.llm_for_zotero.tools.zotero_script]
+approval_mode = "approve"
 
 [memories]
 generate_memories = true
