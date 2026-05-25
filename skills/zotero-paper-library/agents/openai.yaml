@@ -1,0 +1,7 @@
+interface:
+  display_name: "Zotero Paper Library"
+  short_description: "Organize Codex papers in Zotero"
+  default_prompt: "Use $zotero-paper-library to organize downloaded research papers and generated reports in my local Zotero library."
+
+policy:
+  allow_implicit_invocation: true

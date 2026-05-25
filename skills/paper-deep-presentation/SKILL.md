@@ -65,6 +65,10 @@ Create the directory only if it does not exist. Do not write reports elsewhere u
    - Confirm the assets directory exists and contains the screenshots referenced by the Markdown report.
    - Confirm every embedded image path points to an existing file when resolved relative to the Markdown report.
    - Include source path/URL, extraction method, and any unavailable evidence in the report.
+9. Hand off to Zotero when local paper management is requested.
+   - Use `$zotero-paper-library` to create a reviewable import manifest for the source PDF, generated Markdown report, and useful report assets.
+   - Prefer attaching the Markdown report and screenshots to the same Zotero paper item rather than creating separate paper items for generated artifacts.
+   - Preserve provenance tags such as `codex`, `paper-deep-presentation`, and the paper topic.
 
 ## Reading Standards
 

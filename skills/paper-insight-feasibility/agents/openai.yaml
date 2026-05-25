@@ -1,0 +1,7 @@
+interface:
+  display_name: "Paper Insight Feasibility"
+  short_description: "单篇论文 insight 生成与可行性调研"
+  default_prompt: "Use $paper-insight-feasibility to analyze this paper, propose research insights, and assess feasibility."
+
+policy:
+  allow_implicit_invocation: true

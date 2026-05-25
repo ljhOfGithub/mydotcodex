@@ -5,6 +5,7 @@ description: Use when the user wants to investigate a research field, topic, met
 
 # Field Progress Survey
 
+
 ## Goal
 
 Produce a concise, evidence-grounded survey of a field's historical trajectory and current frontier. Cite real papers and venues; do not claim to have read every paper deeply unless full-text reading was actually performed.
@@ -53,6 +54,11 @@ Search multiple scholarly sources when possible:
    - Explain why each phase mattered technically.
    - Identify current frontier themes, open problems, and likely next directions.
    - Distinguish mature consensus from active debate.
+
+7. Hand off downloaded papers to Zotero when local paper management is requested.
+   - Use `$zotero-paper-library` to build a manifest for downloaded PDFs, metadata files, and generated survey reports.
+   - Preserve source URLs, DOI/arXiv/OpenReview identifiers, topic tags, and the survey date.
+   - Mark papers cited in the final survey with `field-progress-survey` and `survey-cited` tags.
 
 ## Output Shape
 

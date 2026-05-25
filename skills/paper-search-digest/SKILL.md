@@ -12,11 +12,13 @@ Use this skill to turn a user-provided CS research topic into a reproducible, de
 1. Clarify only missing essentials: topic/keywords, field, optional date range, and target report directory. If unspecified, default the report directory to `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/reports`.
 2. Run `scripts/search_papers.py` to query public sources, deduplicate against prior runs, download available PDFs, and write a candidate JSON file.
 3. Inspect the JSON. If there are fewer than ten new papers, report the real count; do not pad with old or irrelevant papers.
-4. Build a processing list from all newly found papers in the JSON. Default to processing every new paper returned by the search script. Skip only when a paper is duplicate, clearly off-topic, lacks enough source evidence to identify it, or the user explicitly requested a smaller count. Record the reason for every skip.
-5. For every paper in the processing list with a local PDF path, invoke `/Users/jackie/.codex/skills/paper-deep-presentation/SKILL.md` and pass the local PDF path plus title/source URL. That skill must generate the detailed beginner-friendly presentation report with screenshots under `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports`.
-6. If a paper in the processing list has no downloaded PDF, first try to find an authoritative PDF. If no PDF is available, call `paper-deep-presentation` with the best authoritative URL/title and clearly mark missing PDF evidence in the batch summary.
-7. Write only a lightweight batch index/summary into the reports directory using a non-overwriting filename. Include the date, topic slug, and a run timestamp or suffix, for example `2026-05-24-093012-edge-iot-paper-batch.md`. The batch index should link to each deep presentation report produced by `paper-deep-presentation` and list any skipped papers with reasons.
-8. Update nothing else unless the user asked for it. Keep downloaded PDFs and JSON sidecars under the reports directory's `_paper_search_digest/` subfolder.
+4. Run a supplemental PDF download pass for every newly found paper whose `pdf_path` is empty. Try, in order: arXiv PDF URL if an arXiv id exists; OpenAlex `primary_location` / open access PDF when present; DOI publisher page; exact-title search on arXiv/OpenAlex/Semantic Scholar; and finally publisher-specific authenticated access such as IEEE/Chrome. Save any recovered PDF into `<reports-dir>/_paper_search_digest/pdfs/` with a non-overwriting filename, verify it with `file`, and record `supplemental_pdf_status` in the batch notes. Do not pass unverified HTML/login/access-denied files to downstream reading.
+5. Build a processing list from all newly found papers in the JSON, using supplemental PDF paths when recovered. Default to processing every new paper returned by the search script. Skip only when a paper is duplicate, clearly off-topic, lacks enough source evidence to identify it, or the user explicitly requested a smaller count. Record the reason for every skip.
+6. For every paper in the processing list with a local PDF path, invoke `/Users/jackie/.codex/skills/paper-deep-presentation/SKILL.md` and pass the local PDF path plus title/source URL. That skill must generate the detailed beginner-friendly presentation report with screenshots under `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports`.
+7. If a paper in the processing list has no downloaded PDF, first try to find an authoritative PDF. If the authoritative page is IEEE Xplore, an IEEE DOI landing page, or otherwise resolves to `ieeexplore.ieee.org`, use the user's Chrome browser session because the user has a PolyU institutional login there. Open the IEEE page in Chrome, use the visible PDF/download controls from the logged-in session, save the PDF into `<reports-dir>/_paper_search_digest/pdfs/` with a non-overwriting filename, and verify the saved file with `file` before treating it as a PDF. If an IEEE document id / article number is known, the official full-text PDF page is usually `https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=<article-number>`; open that URL in Chrome before falling back to the article page's PDF button. Do not ask the user for credentials, do not expose cookies/tokens, and do not attempt to bypass access controls outside the logged-in browser session. If Chrome/PolyU access fails, record the exact failure reason and continue with the best authoritative URL/title.
+8. If no PDF is available after the authoritative-source and IEEE/Chrome attempts, call `paper-deep-presentation` with the best authoritative URL/title and clearly mark missing PDF evidence in the batch summary.
+9. Write only a lightweight batch index/summary into the reports directory using a non-overwriting filename. Include the date, topic slug, and a run timestamp or suffix, for example `2026-05-24-093012-edge-iot-paper-batch.md`. The batch index should link to each deep presentation report produced by `paper-deep-presentation` and list any skipped papers with reasons.
+10. Update nothing else unless the user asked for it. Keep downloaded PDFs and JSON sidecars under the reports directory's `_paper_search_digest/` subfolder.
 
 ## Search Command
 
@@ -82,6 +84,10 @@ Keep this identification brief in the batch index. The full explanation, termino
 
 For arXiv papers, prefer the PDF. For DBLP-only hits, use linked DOI/publisher pages or search the exact title on arXiv/OpenAlex/Semantic Scholar before concluding that a PDF is unavailable.
 
+For IEEE papers, prefer the official IEEE PDF when access is available through the user's logged-in Chrome/PolyU session. Save only the downloaded PDF file, never browser profile data. If Chrome opens the PDF in the built-in PDF viewer or the Google Scholar Reader extension, use that viewer's visible Download button to save the PDF. After downloading, verify that the file is a real PDF rather than an HTML login page or access-denied page. If verification fails, mark it as `IEEE/PolyU 下载失败：<reason>` and do not pass the bogus file to `paper-deep-presentation`.
+
+When the search script did not download a PDF, do not immediately mark the paper as missing evidence. Perform the supplemental pass above and write one of these statuses into the batch index: `补充下载成功`, `补充下载失败：无开放 PDF`, `补充下载失败：需要登录但 Chrome/PolyU 不可用`, `补充下载失败：下载文件不是 PDF`, or `补充下载失败：网络/页面错误 <details>`.
+
 ## Terminology Rules
 
 When writing Chinese reports, do not leave technical English as unexplained shorthand. For `instrument/instrumentation`, `baseline`, `benchmark`, `marker`, `piggyback`, `workload`, and `trace`, explain the concrete action and role in the paper before using the term repeatedly.
@@ -106,6 +112,8 @@ The batch Markdown report must include:
 - a table mapping each processed paper to the Markdown report generated by `paper-deep-presentation`
 - skipped-paper notes for any candidates that were duplicate, clearly off-topic, lacked enough evidence, or were excluded by an explicit user count limit
 - any failures: network/API/PDF download/rendering/deep-report generation errors
+- for IEEE candidates, whether PDF access came from the Chrome/PolyU logged-in session, failed verification, or was unavailable
+- supplemental PDF status for every processed or skipped paper whose original `pdf_path` was empty
 
 Do not use this skill to generate the full per-paper technical report. If a per-paper report is needed, it must be created by `paper-deep-presentation`.
 
