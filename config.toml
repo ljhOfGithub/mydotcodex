@@ -1,14 +1,16 @@
 notify = ["/Users/jackie/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "never"
 sandbox_mode = "workspace-write"
+# 1. 选择 "完全访问" 模板
+default_permissions = ":danger-full-access"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-05-22T15:57:21Z"
+last_updated = "2026-06-03T14:58:37Z"
 source_type = "local"
 source = "/Users/jackie/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.openai-bundled]
-last_updated = "2026-05-25T05:57:09Z"
+last_updated = "2026-06-03T14:44:13Z"
 source_type = "local"
 source = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -21,19 +23,19 @@ enabled = true
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
 
-[plugins."computer-use@openai-bundled"]
-enabled = true
-
-[plugins."chrome@openai-bundled"]
-enabled = true
-
 [plugins."outlook-email@openai-curated"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
+enabled = true
+
+[plugins."linear@openai-curated"]
 enabled = true
 
 [plugins."browser@openai-bundled"]
 enabled = true
 
-[plugins."google-drive@openai-curated"]
+[plugins."chrome@openai-bundled"]
 enabled = true
 
 [projects."/Users/jackie"]
@@ -60,13 +62,22 @@ trust_level = "trusted"
 [projects."/Users/jackie/Documents/codex 管理"]
 trust_level = "trusted"
 
+[projects."/Users/jackie/Documents/besc2026"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/Git/LCCA"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/Git/BESC-2026"]
+trust_level = "trusted"
+
 [tui.model_availability_nux]
-"gpt-5.5" = 1
+"gpt-5.5" = 4
 
 [features]
 codex_hooks = true
-js_repl = false
 memories = true
+js_repl = false
 
 [hooks.state]
 
@@ -98,24 +109,6 @@ followUpQueueMode = "queue"
 
 [desktop.open-in-target-preferences]
 global = "fileManager"
-
-[mcp_servers.node_repl]
-args = []
-command = "/Applications/Codex.app/Contents/Resources/node_repl"
-startup_timeout_sec = 120
-
-[mcp_servers.node_repl.env]
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-BROWSER_USE_MARKETPLACE_NAME = "openai-bundled"
-CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
-CODEX_HOME = "/Users/jackie/.codex"
-NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
-NODE_REPL_NODE_MODULE_DIRS = ""
-NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/node"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "167fdf579477181fba1773c1efb067b00c5a64fe85dafb50a2001bde198dc739"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex"
-NODE_REPL_UNTRUSTED_ENV_ALLOWLIST = "BROWSER_USE_MARKETPLACE_NAME"
-SKY_CUA_SERVICE_PATH = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/computer-use/Codex Computer Use.app"
 
 [mcp_servers.llm_for_zotero]
 default_tools_approval_mode = "approve"
@@ -171,6 +164,24 @@ approval_mode = "approve"
 
 [mcp_servers.llm_for_zotero.tools.zotero_script]
 approval_mode = "approve"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = ""
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex"
+CODEX_HOME = "/Users/jackie/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "4b6bfaf4ed2ce9b5cd68e60a61642eb4927a36306ba8c8993f6058607b3530fb"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
 
 [memories]
 generate_memories = true

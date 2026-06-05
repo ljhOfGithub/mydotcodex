@@ -1,0 +1,7 @@
+interface:
+  display_name: "Survey Research Lineage"
+  short_description: "根据一篇或多篇 survey 梳理研究方向脉络"
+  default_prompt: "Use $survey-research-lineage to organize this research direction from survey papers and produce an evidence-grounded lineage map."
+
+policy:
+  allow_implicit_invocation: true
