@@ -8,6 +8,7 @@ import datetime as dt
 import hashlib
 import json
 import re
+import socket
 import sys
 import time
 import urllib.error
@@ -21,6 +22,10 @@ from typing import Any
 USER_AGENT = "paper-search-digest/1.0 (mailto:none)"
 ARXIV_NS = {"atom": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
 DEFAULT_SOURCES = ("arxiv", "dblp", "openalex")
+INITIAL_RETRY_DELAY_SECONDS = 2
+MAX_RETRY_DELAY_SECONDS = 30
+MAX_RETRY_ATTEMPTS = 5
+PROXY_DISABLED = False
 
 
 def slugify(text: str, max_len: int = 64) -> str:
@@ -32,16 +37,113 @@ def normalize_title(title: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ", title.lower())).strip()
 
 
+def is_transient_network_error(exc: Exception) -> bool:
+    if isinstance(exc, (TimeoutError, socket.timeout)):
+        return True
+    if isinstance(exc, urllib.error.HTTPError):
+        return exc.code in {408, 425, 429, 500, 502, 503, 504}
+    if isinstance(exc, urllib.error.URLError):
+        reason = exc.reason
+        if isinstance(reason, (TimeoutError, socket.timeout, ConnectionError, OSError)):
+            return True
+        if isinstance(reason, str):
+            lowered = reason.lower()
+            return any(
+                marker in lowered
+                for marker in (
+                    "tempor",
+                    "timed out",
+                    "timeout",
+                    "connection reset",
+                    "connection aborted",
+                    "connection refused",
+                    "operation not permitted",
+                    "proxy",
+                    "network is unreachable",
+                    "name or service not known",
+                    "nodename nor servname",
+                    "try again",
+                )
+            )
+    return False
+
+
+def retry_request(fetcher, *, url: str, timeout: int, label: str):
+    attempt = 0
+    delay = INITIAL_RETRY_DELAY_SECONDS
+    while True:
+        attempt += 1
+        try:
+            return fetcher()
+        except Exception as exc:
+            if not is_transient_network_error(exc):
+                raise
+            print(
+                f"[paper-search-digest] transient {label} failure on attempt {attempt} for {url}: {exc!r}; "
+                f"retrying in {delay}s",
+                file=sys.stderr,
+                flush=True,
+            )
+            if attempt >= MAX_RETRY_ATTEMPTS:
+                raise
+            time.sleep(delay)
+            delay = min(delay * 2, MAX_RETRY_DELAY_SECONDS)
+
+
+def is_proxy_or_permission_error(exc: Exception) -> bool:
+    if isinstance(exc, PermissionError):
+        return True
+    if isinstance(exc, urllib.error.URLError):
+        reason = exc.reason
+        return isinstance(reason, PermissionError) or "proxy" in str(reason).lower()
+    return "operation not permitted" in str(exc).lower()
+
+
+def open_with_direct_fallback(req: urllib.request.Request, *, url: str, timeout: int, label: str):
+    global PROXY_DISABLED
+    if PROXY_DISABLED:
+        direct_opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        return retry_request(
+            lambda: direct_opener.open(req, timeout=timeout),
+            url=url,
+            timeout=timeout,
+            label=f"direct {label}",
+        )
+    try:
+        return retry_request(
+            lambda: urllib.request.urlopen(req, timeout=timeout),
+            url=url,
+            timeout=timeout,
+            label=label,
+        )
+    except Exception as exc:
+        if not is_proxy_or_permission_error(exc):
+            raise
+        PROXY_DISABLED = True
+        print(
+            f"[paper-search-digest] proxy/permission failure for {url}; disabling environment proxy for this run",
+            file=sys.stderr,
+            flush=True,
+        )
+        direct_opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        return retry_request(
+            lambda: direct_opener.open(req, timeout=timeout),
+            url=url,
+            timeout=timeout,
+            label=f"direct {label}",
+        )
+
+
 def request_text(url: str, *, accept: str = "application/json", timeout: int = 30) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+    response = open_with_direct_fallback(req, url=url, timeout=timeout, label="text request")
+    return response.read().decode("utf-8", errors="replace")
 
 
 def request_bytes(url: str, *, timeout: int = 60) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read()
+    response = open_with_direct_fallback(req, url=url, timeout=timeout, label="byte request")
+    return response.read()
 
 
 def as_list(value: Any) -> list[Any]:

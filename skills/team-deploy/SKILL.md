@@ -32,7 +32,7 @@ Options: "dev" | "staging" | "production" | "rollback"
 - [ ] Lint and tests pass locally and in CI
 - [ ] Build artifact reproducible from clean checkout
 - [ ] Required env vars and secrets present in target environment
-- [ ] Secrets never committed; loaded from a secret manager
+- [ ] Plaintext live secrets are not committed. Version only encrypted secret files, placeholder templates, or secret-manager references; require an explicit secret scan before release.
 - [ ] Health/readiness endpoints respond correctly
 - [ ] Previous version remains running until new version is healthy
 - [ ] Rollback procedure documented and tested

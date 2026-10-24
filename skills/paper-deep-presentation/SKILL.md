@@ -1,148 +1,183 @@
 ---
 name: paper-deep-presentation
-description: Deep-read one research paper from a local file path, PDF, arXiv/DOI URL, or exact title; save screenshots of important figures/tables from the paper; explain technical terms for a beginner in Chinese; reconstruct the paper's experimental process in presentation style; and write a Markdown report with embedded images to /Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports. Use when the user asks to 精读/精度/讲解 a single paper, understand its terminology, prepare a presentation, preserve paper figures, or produce a beginner-friendly paper report.
+description: 精读一篇论文时补足必要背景并生成独立术语表，重建问题、最小子问题、对应子方法、基础理论、从 insight 到实验场景的设计链和有限结论，并抽象可迁移的问题—方法原则；需要时提出可反驳的新想法。可用于 PDF、论文链接、现有 Obsidian 笔记或学术报告准备。
 ---
 
-# Paper Deep Presentation
+# 论文精读：重建推理链
 
-Use this skill to turn one paper into a Chinese Markdown presentation report for an entry-level reader in the field. Be faithful to the paper, explain prerequisites patiently, and make the experiment section detailed enough that the user can present it.
+目标是让读者能回答“作者为什么**必须**这样设计、实验为什么能检验这个解释、结果到底迫使我们相信什么”。先根据用户的提问和现有笔记判断其先验知识；用户说看不懂、第一次接触领域或未说明水平时，提供可直接进入论文的简短背景桥梁，再讲作者论证。不要把能读原文等同于已懂领域概念。
 
-## Output Location
+## 先搭建读前背景桥梁
 
-Always write the final Markdown file under:
+在草稿中倒推：要理解论文的中心失败，读者必须先知道哪些对象、正常流程和旧办法？只选会影响后续推理的 3–6 个概念，按“熟悉的任务场景 → 系统怎样运行 → 哪一步会失败 → 论文术语”的顺序解释。先用一个贯穿全文的小例子说明输入、调用、反馈和被修改的状态，再在正文需要时引入缩写。遇到同名但层级不同的概念（如协议与系统、资源版本与任务状态、训练与推理时更新），明确划边界。
+
+每个先验概念都应回答“在这篇论文的哪一步会用到它”，而不只是给字典定义。常见基础概念也要按读者水平解释，例如 Agent、工具、记忆、数据集、基线、消融和指标；已经懂的概念不重复讲。术语的解释不得替代论文证据，类比要标为教学例子，不能写成作者实验。背景不足时优先补足因果链所需的前提，不用扩大成通用领域综述。
+
+## 独立术语表是必需产物
+
+每篇完整精读都必须有一个可独立回看的“术语表”章节；正文首次出现时的就地解释和文末/文中的独立术语表必须同时存在，不能互相替代。术语表服务于复习，正文解释服务于不中断阅读。用户明确要求省略或输出不是完整精读时，才可不生成。
+
+术语候选覆盖三类：
+
+1. **领域概念、方法名与评价概念：**不懂就会阻断问题、方法或实验推理的词，例如 continual learning、ablation、oracle、effect footprint。
+2. **缩写、符号与论文自造名词：**首次展开全称，并说明现实对象、输入输出或检查作用；不能只把英文换成中文。
+3. **CET-6 以上且影响阅读的学术词或短语：**按 `$paper-vocab-cet6-plus` 的筛选原则，只保留本文语境中真正需要学习的词；普通学术词、作者名、机构名、引用列表词和 OCR 碎片不收录。
+
+推荐使用一张紧凑表：
+
+| English term / symbol | 中文对应 | 类型 | 零基础解释 | 在本文中的作用与易错边界 |
+| --- | --- | --- | --- | --- |
+
+每项必须来自已核对的全文或用户提供材料，中文含义不得留空。合并词形变化和同义重复；专有名词注明是“术语”，普通难词注明词性。解释至少回答“它是什么”和“本文哪一步用到”；容易与相邻概念混淆时写清边界。表前标明来源与证据等级（`全文`、`摘要/元数据` 或 `人工补充`）。如果正文保留了尚未解释的专业英文词，补进术语表或改写正文。
+
+## 资料与写入位置
+
+1. 核实论文身份和版本；优先使用用户提供的本地 PDF 或正式全文。阅读摘要、引言、方法、实验、限制及相关附录；图表承载关键设计或结果时直接查看。只有摘要时标明证据不足，不能声称精读。
+2. 用户已有精读卡、候选卡或 vault 节点时，**更新原文件**；不为了调用另一个 Skill 再造内容相近的报告。若用户明确要独立讲稿，或没有指定存放位置的独立报告，才使用 `/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports/`。图片放在报告旁边并用相对路径引用。
+3. 原文、作者解释、实验直接支持的结论、自己的推断必须能分辨。每个关键事实尽可能给出章节、图表或页码；缺少的信息写“论文未说明”。
+
+批量维护已有精读时，逐篇读原文并逐篇写入现有笔记。可以用脚本核查文件、页码和链接，但不能把结构化字段交给模板批量扩写成精读正文，也不能把格式检查通过当成内容核实。上一篇的讲解结构只有在能解释下一篇作者的真实论证时才能复用。
+
+## 先反向抽出作者的论证
+
+不要按 PDF 目录直接生成笔记。先在草稿里回答六个问题，再安排阅读顺序：
+
+1. **到底要解释什么现象或解决什么具体失败？** 先确认读者能说出任务如何运行、涉及哪些对象，再给出系统、条件与后果。若只有“已有方法没有做 X”，继续追问 X 为什么值得做。
+2. **最自然的旧解释或旧方法是什么？** 写出它在哪个可观察条件下无法解释现象或处理失败。不要空泛说“效果差”。
+3. **作者押注的机制是什么？** 用“因为 A 影响 B，所以改变 C 应使 D 改变”表达。若论文只提出工程方法、未建立机制，明确说它是设计假设。
+4. **方法究竟改了机制链上的哪一步？** 说清输入、被改变的状态、执行流程与输出。给一个具体例子帮助读者追踪同一个任务，避免只列模块名。
+5. **什么结果才能让作者的解释赢过最强替代解释？** 在读结果前写出区分性预测和必要对照。区分主效果、机制验证、泛化、成本；不要把更多数据集误作因果证据。
+6. **论文实际得到什么？** 给关键表/图、数字的比较对象、重复次数和预算；分别写实验证实的窄结论、作者更强的解释、仍可能成立的替代解释。
+
+## 把问题与方法拆到可迁移的最小粒度
+
+论文同时提出问题和方法改进时，不能只并列“问题列表”和“方法模块”。先把总问题拆成**可独立失败、可单独观察**的最小子问题，再把方法拆成改变某个状态、决策或信息流的最小子方法，并逐项对应：
 
 ```text
-/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports
+总问题
+→ 子问题 P1：在哪个输入/状态/决策点发生什么失败？
+  → 子方法 M1：具体改变哪个变量、表示、约束或操作？
+  → 作用链：M1 如何阻断 P1 的失败机制？
+  → 证据：哪个对照或消融单独检验 P1 ↔ M1？
+  → 边界：仍与哪些因素共同变化？
+→ 子问题 P2 → 子方法 M2 → 作用链 → 证据 → 边界
 ```
 
-Use a filename like:
+粒度以论文证据能支持的最小单元为准。子问题不是换一种说法重复总问题；它应能在其他子问题不发生时单独出现。子方法不是模块名；它应说明输入是什么、改动发生在哪里、输出怎样改变。若一个组件同时处理多个子问题，分别写出作用路径；若多个组件共同解决一个子问题，说明缺一项会留下什么失败。实验同时改变多个因素时，不得伪造一一归因，标明“联合支持、尚未隔离”。论文若只诊断问题、没有提出方法改进，明确写“本文没有对应子方法”，不要强行补一个。
+
+完成映射后，提炼一条或多条**可迁移的问题—方法结论**，使用下面的约束句式：
 
 ```text
-YYYY-MM-DD-short-title-presentation.md
+当场景满足条件 C，且失败来自机制 P 时，
+在决策点 X 使用方法原则 M，
+应通过可观察量 O 改善结果 Y；
+若出现反例 R，或前提 C 不成立，则该结论不应迁移。
 ```
 
-For screenshots, create a sibling assets directory named after the report file:
+迁移结论必须去掉论文专有名词，但保留触发条件、干预点、预期可观察变化和失效边界。随后给一个贴近用户可能面对问题的迁移检查：如何识别 P、最小可试的 M、先看哪个 O、什么结果应停止迁移。不要把“在论文任务上有效”泛化成通用最佳实践。
+
+## 按“问题推动下一步”来写
+
+每一段都应回答前一段末尾留下的问题，并在末尾产生下一段要回答的问题。推荐的逻辑是：
 
 ```text
-/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports/YYYY-MM-DD-short-title-presentation_assets
+具体失败/反常现象
+→ 旧解释为何不够（所以需要什么新解释？）
+→ 作者机制及可区分预测（所以该改变哪一步？）
+→ 方法与直观运行过程（所以怎样证明改变的正是那一步？）
+→ 决定性实验与对照（实际出现了什么？）
+→ 结果及证据边界（还剩哪种解释？）
+→ 新 insight 或停在“尚无足够证据”
 ```
 
-Create the directory only if it does not exist. Do not write reports elsewhere unless the user explicitly overrides the path.
+论文若有多条主张，可分成几条短链；每条都必须从主张走到对应实验和边界。理论论文用假设、定理、证明及适用范围替代实验链。若下一段无法回答上一段，先修复逻辑关系，不用增加更多材料掩盖断裂。
 
-## Workflow
+## 从 idea 或 insight 逆向还原实验设计
 
-1. Identify the paper source.
-   - If the user gives a local file path, verify it exists before reading.
-   - If the user gives a title or URL, search authoritative sources first: arXiv, OpenReview, ACL Anthology, ACM/IEEE publisher pages, DOI landing pages, official project pages, or author PDFs.
-   - If multiple papers match a title, stop and ask the user to choose instead of guessing.
-2. Extract and inspect the paper.
-   - Prefer PDF text extraction for PDFs (`pdftotext`, `mutool`, PyMuPDF, or another available parser).
-   - Read at least abstract, introduction, method, experiments, results, limitations, and appendix sections when present.
-   - Check figures/tables when they carry experimental settings or results.
-3. Save and review paper visuals.
-   - Identify all figures/tables that are needed to explain the method, system architecture, experiment setup, main results, ablations, or limitations.
-   - Render screenshots into the report assets directory. Prefer cropped figure/table screenshots when coordinates can be determined; otherwise save the full page that contains the figure/table.
-   - Use stable names such as `figure-04-system-design.png`, `table-01-gpt2-tta.png`, or `page-07-main-results.png`.
-   - Embed important screenshots in the Markdown report with paths relative to the Markdown file, for example `![Figure 4: system design](YYYY-MM-DD-short-title-presentation_assets/figure-04-system-design.png)`.
-   - Do not use absolute local paths such as `/Users/...` in Markdown image links; VS Code Preview may render them as blank. Keep the assets directory next to the report and link it relatively.
-   - After rendering, inspect the image files when possible. Do not include blank, unreadable, or irrelevant screenshots.
-4. Build a beginner vocabulary map.
-   - Extract domain terms, acronyms, model names, datasets, metrics, algorithm names, and evaluation protocols.
-   - Explain each term as if the user is new to the area: plain definition, why it appears in this paper, and how it connects to the paper's contribution.
-   - Include any English term that remains in the Chinese prose, even if it is a common systems/ML verb such as `instrument`, `benchmark`, `baseline`, `marker`, `piggyback`, `profiling`, or `workload`.
-   - Do not over-explain generic English words; focus on terms that block understanding.
-5. Reconstruct the paper's logic.
-   - State the research problem, why it matters, what prior approaches miss, and the paper's core idea.
-   - Separate what the paper claims from what the experiments actually support.
-6. Explain the experiments like a formal presentation.
-   - Cover datasets/tasks, train/test split or benchmark protocol, baselines, metrics, implementation details, ablations, main tables/figures, and failure cases.
-   - For each experiment, answer: question being tested, setup, comparison target, result, author's interpretation, and your caveat.
-   - Tie each major experiment explanation back to its screenshot or table image when available.
-   - If a detail is missing in the paper, write `论文中未明确说明` rather than inventing it.
-7. Write the Markdown report using `references/report-template.md`.
-8. Verify the report.
-   - Confirm the Markdown file exists in the required output directory.
-   - Confirm the assets directory exists and contains the screenshots referenced by the Markdown report.
-   - Confirm every embedded image path points to an existing file when resolved relative to the Markdown report.
-   - Include source path/URL, extraction method, and any unavailable evidence in the report.
-9. Hand off to Zotero when local paper management is requested.
-   - Use `$zotero-paper-library` to create a reviewable import manifest for the source PDF, generated Markdown report, and useful report assets.
-   - Prefer attaching the Markdown report and screenshots to the same Zotero paper item rather than creating separate paper items for generated artifacts.
-   - Preserve provenance tags such as `codex`, `paper-deep-presentation`, and the paper topic.
+不要把实验写成“用了哪些数据集、比较了哪些表”。读者应能从中心 insight 重新推到作者为什么需要这个场景和这些条件。对每条中心主张，逐层回答：
 
-## Reading Standards
+1. **待区分的解释是什么？** 写成“机制 M 与竞争解释 A 在结果 Y 上都可能成立”，再指出两者在哪个可观察量上给出不同预测。
+2. **实验对象是什么？** 区分研究对象、实验单位、观测单位和重复单位。例如任务是处理分配单位，模型运行是重复观测时，不能把同一任务的多次运行当成多个独立任务。
+3. **实验环境固定什么？** 列出模型、提示、工具、数据版本、预算、检索器、硬件、随机种子、任务顺序等固定量；论文未说明就写未说明。
+4. **条件怎样逐条构造？** 为每个 treatment/control 写清只改变哪个因素、保留哪些因素。基线、消融、oracle、负对照、正对照分别排除什么解释；若多个因素同时改变，标明混杂。
+5. **场景为什么能放大目标机制？** 解释为何选择该任务、顺序、容量、分布漂移、攻击或异常状态；区分自然代表性场景、压力测试和事后挑出的难例。
+6. **一次实验怎样执行？** 从初始状态、分配、执行、反馈、写入/更新，到最终测量逐步列出；说明是否重用同一对象、是否有 carry-over，以及如何随机化、阻断或配对。
+7. **测量与统计单位是什么？** 定义主要/次要指标、分母、方向、聚合层级、独立重复数、区间或方差；检查伪重复、任务筛选、best-of-N、缺失 trial 与事后子集。
+8. **结果怎样描述？** 依次写原始对比、效应方向/大小、不确定性、反常或负结果；再写最窄实验结论。作者更强的机制解释必须另列，不能与数据描述混成一句。
+9. **实验总结与下一步是什么？** 说明该实验排除了什么、仍未排除什么、哪个补充对照最便宜，以及什么结果会推翻 insight。
 
-- Do not rely only on abstract or title.
-- Do not fabricate numeric results, dataset sizes, hyperparameters, baselines, or author claims.
-- Quote sparingly. Prefer paraphrase and cite section/table/figure names when possible.
-- Keep the tone Chinese, beginner-friendly, and presentation-ready.
-- When the paper is outside the user's likely background, add a short prerequisite ladder: what to understand first, second, and third.
-- If the paper has weak experiments or unsupported claims, say so clearly but fairly.
+每个核心实验使用下面的最小卡，而不是把整篇论文压成一张大表：
 
-## Language and Terminology Standards
+| 项 | 必答内容 |
+| --- | --- |
+| idea / insight | 想解释的现象、候选机制、最强竞争解释 |
+| 场景 | 为什么这个任务/分布/顺序能让预测分叉 |
+| 对象与单位 | 研究对象、处理分配单位、观测单位、独立重复单位 |
+| 环境 | 固定的模型、数据、工具、预算、版本与随机因素 |
+| 条件 | 每组只改变什么；control / treatment / oracle / ablation 各排除什么 |
+| 执行 | 初始状态 → 干预 → 行为/更新 → 测量的逐步过程 |
+| 指标 | 公式或定义、分母、聚合层级、重复与不确定性 |
+| 结果 | 数值/方向 → 窄结论 → 作者解释 → 尚未排除的解释 |
+| 总结 | insight 得到何种支持；最便宜的补充实验；推翻条件 |
 
-- Prefer Chinese explanations over English-heavy prose. On first use, write `中文译名（English term）`; after that, use the Chinese term unless the English abbreviation is standard in the field.
-- Do not put unexplained English verbs directly into Chinese sentences. Avoid vague phrases such as `被 instrument`, `去 benchmark`, `做 profiling`, or `piggyback marker`.
-- Rewrite English-heavy phrases into concrete Chinese actions. Example: replace `进程能被 instrument` with `进程能接入快照协议，也就是能在收发消息时携带快照标记，并在合适时刻记录本地状态`.
-- If an English term is retained anywhere in the report, add it to the glossary with: Chinese translation, beginner explanation, why it matters in this paper, and one common misunderstanding.
-- For `instrument/instrumentation`, explain it as `接入协议/加观测或协议埋点`: modifying, configuring, or wrapping a component so it participates in measurement/control, carries protocol metadata, or records state.
-- Before finalizing, scan for unexplained English terms. At minimum check: `instrument`, `instrumentation`, `benchmark`, `baseline`, `marker`, `gateway`, `snapshot`, `out-group`, `in-group`, `piggyback`, `artifact`, `workload`, `profiling`, and `trace`.
+若论文只报告结果、未提供随机化或重复细节，直接写“无法从原文确认”，不要补造设计。分析已完成实验时可借用实验设计原则检查单位、对照、随机化、阻断、携带效应和伪重复，但不要把论文没有预注册的分析写成预注册。
 
-## Useful Commands
+## 解释公式、符号与基础理论底座
 
-Use commands only after explaining why. Examples:
+当论文用四元组、损失函数、状态转移、界、协议或程序对象表达方法时，不要只做符号翻译。先冻结作者真正研究的对象，再按六层解释：
 
-```bash
-pdftotext "/path/to/paper.pdf" -
+1. **对象层：**系统中的状态、动作、资源、观察和结果各是什么；符号对应现实中的哪个对象。
+2. **操作层：**每个函数或程序读什么、改什么、输出什么；组合顺序为何重要。
+3. **假设层：**哪些状态可观察、哪些影响范围已知、哪些操作可逆、哪些分布或独立性被假定。
+4. **理论来源：**它与哪类基础思想相连，例如状态机/操作语义、事务日志与补偿操作、控制系统状态估计、因果干预、优化、贝叶斯推断或统计学习；只写能由论文形式化对象支持的联系。不能只报理论名称，必须建立下述“理论来源坐标”。
+5. **保证层：**区分定义、恒等式、命题/定理、近似和解释。说明保证针对哪个不变量、在什么前提下成立，以及实验测的是理论前提、理论结论还是系统后果。
+6. **失效层：**未记录状态、隐藏副作用、不可逆外部动作、表示能力不足、分布外输入或错误依赖会在哪里破坏保证。
+
+例如撤回四元组 `(m,w,u,C_e)` 不能只写成“修改、见证、撤回、影响范围”。应说明：`m` 是状态变换，`w` 是变换前读取并保存的最小充分信息，`u` 是以当前状态和 `w` 为输入的补偿/逆程序，`C_e` 是允许变化的 effect footprint；验证检查的是复合操作 `u∘m` 是否在声明范围外保持状态不变、在范围内恢复相关不变量。再明确这更接近带日志的补偿事务与程序语义中的 effect specification，而不等于任意真实世界动作都有数学逆元。
+
+如果论文没有给出严格理论，只能写“概念来源/解释框架”，不得伪造定理。复杂推导按 `formula-derivation` 的规则，稳定顶层对象，列清假设，并把每步标成恒等式、命题、近似或解释。
+
+### 给每条基础理论建立来源坐标
+
+用户不知道理论“从哪里来”时，每条理论线都按同一个最小链解释，不能把四个名词继续换成另外四个名词：
+
+1. **学科与子领域：**先写上位学科，再写研究共同体，例如“计算机科学 → 程序语言与形式化方法”，而不是只写“Hoare logic”。
+2. **历史问题与场景：**解释它最初面对什么对象、失败和行业/工程压力，例如数据库长事务为什么不能一直锁住全部资源；行业背景只能写有来源或可核实的通用场景。
+3. **代表来源：**至少给一篇奠基或代表论文/专著/标准的作者、题名、年份和稳定入口。代表来源不等于当前论文实际引用。
+4. **证据关系：**强制标成以下一种：`[方法内直接使用]`（公式、算法或定义确实出现在当前论文）、`[作者直接引用]`（当前论文参考文献或正文明确连接）、`[作者明确讨论]`（正文讨论该传统但未必以奠基文献为引）、`[学术谱系]`（概念在学界可追溯，但作者未声明灵感）、`[解释性类比]`（仅帮助读者理解）。没有文本证据时禁止写“作者受……启发”。
+5. **迁移桥：**逐步写“旧理论的对象/操作/保证 → 当前论文的哪个对象/操作/检查”，说明当前方法继承了什么，又改造了什么。
+6. **不等价边界：**写明类比在哪一步失效。例如补偿事务只恢复业务可接受状态，不必恢复逐字节旧状态；经验 round-trip 测试也不是 Hoare 逻辑证明。
+
+推荐用一张紧凑表承载：
+
+| 理论线 | 学科 / 子领域 | 原始问题、行业场景 | 代表来源 | 与当前论文的关系 | 继承、改造与不等价边界 |
+| --- | --- | --- | --- | --- | --- |
+
+表后用一个具体对象走完“来源概念 → 当前符号/组件 → 可检验后果”，确保读者能用这条理论解释论文，而不只是记住出处。若当前论文直接引用的是较新的工作，另给奠基来源时要分两行或明确区分；若无法核实代表来源，写“待核实”，不要凭记忆补 DOI。
+
+## 从精读进入新想法
+
+只有用户要求研究 idea 时才继续。先写论文**确实观察到什么**，再找一个仍值得解释的矛盾：例如同一设计在条件 A 有效、在条件 B 失效；或者主结果与消融支持不同的机制。随后写候选 insight：
+
+```text
+在条件 C 下，机制 M 使结果 Y 发生；
+竞争解释 R 也可能造成 Y；
+若 M 正确而 R 错误，改变变量 X 时应出现 P 而不是 Q。
 ```
 
-```bash
-python3 - <<'PY'
-import fitz, sys
-doc = fitz.open(sys.argv[1])
-for i, page in enumerate(doc, 1):
-    print(f"\n--- page {i} ---")
-    print(page.get_text())
-PY "/path/to/paper.pdf"
-```
+给出最便宜的区分实验与会推翻 M 的结果。论文没测过的机制要标成“本项目候选解释”；文献没找到 X 不等于 insight，也不等于新颖性已成立。若新想法依赖多篇论文，使用 `$paper-insight-feasibility` 检查近邻、可行性与反证，但沿用同一张原卡，不重新写一份平行精读。
 
-Use `rg` to inspect extracted text for sections such as `Experiment`, `Evaluation`, `Ablation`, `Dataset`, `Baseline`, `Limitation`, and `Appendix`.
+## 输出与验收
 
-Render selected PDF pages or cropped regions with the bundled helper:
+以 [报告模板](references/report-template.md) 为检查表，按论文实际逻辑调整标题；不强制所有章节。交付前做三项检查：
 
-```bash
-python3 /Users/jackie/.codex/skills/paper-deep-presentation/scripts/render_pdf_screenshots.py \
-  --pdf "/path/to/paper.pdf" \
-  --out-dir "/Users/jackie/Documents/Git/Codex_Automated_Paper_Reader/paper-daily/paper-reports/YYYY-MM-DD-short-title-presentation_assets" \
-  --pages "1,4,8-10" \
-  --slug "paper"
-```
+- **接力检查：**每节回答了上一节提出的问题；删掉任何无法推动下一步的术语、背景、结果数字或泛泛限制。
+- **先验检查：**请一个不了解该子领域的读者仅凭笔记说出任务流程、关键对象、旧做法为何失效；若必须先猜缩写或从后文倒推定义，把缺失的前提移到首次使用处。
+- **术语表检查：**完整精读存在独立术语表；领域概念、缩写/符号和必要的 CET-6+ 词均有中文对应、零基础解释、本文作用与边界；正文保留的专业英文没有未解释项，且术语表没有空占位或只从参考文献抓取的噪声。
+- **映射检查：**每个最小子问题都有对应子方法或明确写明“论文未解决”；每个子方法都说明作用点、证据和边界；至少一条迁移结论包含条件、干预点、可观察量和停止条件。
+- **实验设计检查：**每条中心主张至少有一张最小实验卡；对象、实验单位、环境、条件差异、执行步骤、指标、结果与推翻条件齐全；伪重复、筛选、best-of-N 和联合干预被明确标出。
+- **理论底座检查：**关键符号都能回到现实对象与操作；定义、定理、近似和解释分开；写明理论保证的前提、不变量与失效边界。每条理论线还要有学科、子领域、原始问题/场景、代表来源、证据关系、迁移桥和不等价边界；不得把解释性谱系写成作者灵感。
+- **反驳检查：**每个“因为方法有效所以机制正确”的句子都有能排除替代解释的对照；否则降为观察性结论。
+- **出处检查：**数字、图表和 PDF 链接真实可打开；已有原笔记确实更新，不能只新增文件。
 
-For cropped screenshots, pass one or more region specs in PDF point coordinates:
-
-```bash
-python3 /Users/jackie/.codex/skills/paper-deep-presentation/scripts/render_pdf_screenshots.py \
-  --pdf "/path/to/paper.pdf" \
-  --out-dir "/path/to/report_assets" \
-  --region "figure-04,5,72,110,540,430"
-```
-
-Region format is `name,page,x0,y0,x1,y1`, using 1-based page numbers. If exact crop coordinates are uncertain, render the full page first and use that screenshot in the report rather than guessing.
-
-## Report Contract
-
-The final report must include:
-
-- Paper identity: title, authors, venue/year if known, source path/URL, and report date.
-- One-slide executive summary.
-- Visual evidence index: a table listing each saved screenshot, what it shows, and where it is explained. Use relative image paths so VS Code Preview renders the images.
-- Beginner prerequisite map.
-- Technical terminology glossary.
-- Problem and motivation.
-- Method explanation.
-- Detailed experiment walkthrough.
-- Results interpretation and limitations.
-- Presentation script: a structured talk track the user can speak from.
-- Reading notes: what to reread, what remains uncertain, and follow-up papers or keywords.
-
-Read `references/report-template.md` before writing the report.
+图片仅在它能让某一步更容易理解时保存；可用 `scripts/render_pdf_screenshots.py` 截取原文页，逐张检查清晰度及引用路径。用户要求口头报告时再读 `$paper-communication-layers`，各时长讲稿必须复用同一条已核实的论证链。用户要求 Zotero 管理时再使用 `$zotero-paper-library`。
