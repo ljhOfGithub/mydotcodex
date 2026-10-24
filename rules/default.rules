@@ -1,2 +1,3 @@
 prefix_rule(pattern=["curl"], decision="allow")
 prefix_rule(pattern=["python3", "-c", "import urllib.request, ssl; url='https://ucrel.lancs.ac.uk/usas/USASSemanticTagset.pdf'; data=urllib.request.urlopen(url, context=ssl._create_unverified_context(), timeout=30).read(); open('sources/usas_semantic_tagset.pdf','wb').write(data); print(len(data))"], decision="allow")
+prefix_rule(pattern=["mv", "/Users/jackie/Documents/research/skill-memory-topology-exploration-20261018/vault-staging", "/Users/jackie/Documents/Obsidian Vault/skill-memory-topology-obsidian-vault"], decision="allow")

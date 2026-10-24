@@ -1,0 +1,11 @@
+version = 1
+id = "s2c-2"
+kind = "heartbeat"
+name = "恢复 S2C 剩余实验"
+prompt = "监督完成 Codex 线程 01a1450c-70ec-74f0-a2c1-55bba91ec8b5。当前冻结探索实验为 57/60；第 57 格已作为 install_failure 最终留存，第 58–60 格尚未领取。先只读检查 npm TLS 和 Ubuntu 软件源是否恢复，以及目标线程和不可覆盖 ledger 的当前状态。端点仍不可用或状态无实质变化时保持安静，不重复通知。端点恢复后，向该目标线程发送明确续跑指令：不得重跑第 57 格或任何已 final trial；从 ledger 首个未完成的第 58 格开始，严格保持冻结顺序、并发 1、预算和模型路由，完成至 60/60。随后监督其运行只读分析导出器，分别报告原生 ITT、usage 完整性、过程读取、多 attempt、超时和 install_failure，并做明确标注的缺失结果界限分析；更新同一主稿和状态文档，运行全量测试与 LaTeX 编译。外部独立人工审查不再是硬门槛。不要启动 Daybreak。只有目标线程完成实验、审计、论文更新、测试和编译后，才通知用户并关闭该心跳；若出现需要用户决定的新阻塞，清楚说明。"
+status = "PAUSED"
+rrule = "FREQ=MINUTELY;INTERVAL=15"
+notification_policy = "failed_runs_only"
+target_thread_id = "01a14865-ed2f-7033-9b1c-26dab608113e"
+created_at = 1792242792470
+updated_at = 1792246623560

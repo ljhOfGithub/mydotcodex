@@ -1,0 +1,15 @@
+version = 1
+id = "xhsrepair-capa"
+kind = "cron"
+name = "XHSRepair CAPA 原文页第二次重试"
+prompt = "已停止临时纠偏任务，不再运行。"
+status = "PAUSED"
+rrule = "RRULE:FREQ=DAILY;BYHOUR=3;BYMINUTE=0"
+model = "gpt-5.6-sol"
+reasoning_effort = "high"
+notification_policy = "failed_runs_only"
+execution_environment = "local"
+target = { type = "project", project_id = "local-fbca414eee6501a4f4864568a95ee4f2" }
+cwds = ["/Users/jackie/Documents/paper daily"]
+created_at = 1785437880443
+updated_at = 1785437952689

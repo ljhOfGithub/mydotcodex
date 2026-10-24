@@ -1,18 +1,26 @@
-notify = ["/Users/jackie/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "never"
-sandbox_mode = "workspace-write"
-# 1. 选择 "完全访问" 模板
+# 默认本地权限：Codex 官方内置 Full access。
 default_permissions = ":danger-full-access"
+service_tier = "default"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
+
+notify = ["/Users/jackie/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"\\/usr\\/bin\\/python3\",\"\\/Users\\/jackie\\/.codex\\/hooks\\/feishu_notify.py\"]"]
+sandbox_mode = "danger-full-access"
+model_reasoning_summary = "detailed"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-06-03T14:58:37Z"
 source_type = "local"
 source = "/Users/jackie/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.openai-bundled]
-last_updated = "2026-06-03T14:44:13Z"
 source_type = "local"
 source = "/Users/jackie/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.chatcut-inc]
+source_type = "git"
+source = "https://github.com/ChatCut-Inc/agent-plugin.git"
+ref = "main"
 
 [plugins."documents@openai-primary-runtime"]
 enabled = true
@@ -32,10 +40,34 @@ enabled = true
 [plugins."linear@openai-curated"]
 enabled = true
 
-[plugins."browser@openai-bundled"]
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
 [plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
+enabled = true
+
+[plugins."chatcut@chatcut-inc"]
 enabled = true
 
 [projects."/Users/jackie"]
@@ -59,9 +91,6 @@ trust_level = "trusted"
 [projects."/Users/jackie/Documents/research"]
 trust_level = "trusted"
 
-[projects."/Users/jackie/Documents/codex 管理"]
-trust_level = "trusted"
-
 [projects."/Users/jackie/Documents/besc2026"]
 trust_level = "trusted"
 
@@ -69,6 +98,18 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/jackie/Documents/Git/BESC-2026"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/quant"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/life"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/aioc"]
+trust_level = "trusted"
+
+[projects."/Users/jackie/Documents/ChatGPT/business"]
 trust_level = "trusted"
 
 [tui.model_availability_nux]
@@ -106,9 +147,21 @@ preventSleepWhileRunning = true
 keepRemoteControlAwakeWhilePluggedIn = true
 conversationDetailMode = "STEPS_COMMANDS"
 followUpQueueMode = "queue"
+dock-icon-preference = "app-default"
+selected-avatar-id = "pet_6abe033f8c4c8191828fdea461f29f0a"
+localeOverride = "zh-CN"
+computerUseAlwaysHidePictureInPicture = true
+"browser-family-enabled:edge" = false
+toys-confetti-enabled = false
+dictationDictionary = []
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "persistent", "max"]
+browser-show-full-url = true
 
 [desktop.open-in-target-preferences]
 global = "fileManager"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/jackie/Documents/research" = "fileManager"
 
 [mcp_servers.llm_for_zotero]
 default_tools_approval_mode = "approve"
@@ -167,27 +220,39 @@ approval_mode = "approve"
 
 [mcp_servers.node_repl]
 args = []
-command = "/Applications/Codex.app/Contents/Resources/node_repl"
+command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
 startup_timeout_sec = 120
 
 [mcp_servers.node_repl.env]
 NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
-NODE_REPL_NODE_MODULE_DIRS = ""
-NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/node"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jackie/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/jackie/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "4b6bfaf4ed2ce9b5cd68e60a61642eb4927a36306ba8c8993f6058607b3530fb"
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+BROWSER_USE_CODEX_APP_VERSION = "26.1016.62342"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jackie/.codex/plugins/cache/openai-bundled/browser/26.1016.62342/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_SERVICE_PATH = "/Users/jackie/.codex/computer-use/Codex Computer Use.app"
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = false
 
 [memories]
 generate_memories = true
 use_memories = true
 
-sandbox_mode = "workspace-write"
+[shell_environment_policy.set]
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
 
-[sandbox_workspace_write]
-network_access = true
+[tool_suggest]
+disabled_tools = [{ type = "plugin", id = "superpowers@openai-curated-remote" }]

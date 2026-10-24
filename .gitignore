@@ -28,6 +28,9 @@ session_index.jsonl
 *.sqlite-shm
 *.sqlite-wal
 *.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
 .codex-global-state.json
 .codex-global-state.json.bak
 .personality_migration

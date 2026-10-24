@@ -1,0 +1,10 @@
+version = 1
+id = "auto-research"
+kind = "heartbeat"
+name = "计算机论文 Auto Research"
+prompt = "继续当前计算机方向 autoresearch。先读取本项目的 research-state.yaml、findings.md 与 research-log.md，并检查当前进程、最新 Git 提交和实验结果文件。保持事实边界：计划、代码、测试、实验、论文结论分别陈述；先复现强基线，再锁定可反驳假设和指标；负结果也记录。每轮检查是否真正推进了可投 CCF B 以上的算法贡献；若停滞，做外循环反思、重新核对本地全文与直接近邻并调整方向。用户已明确要求持续看到实时进展，因此每次运行都必须通知，并用简短固定结构说明：当前阶段；正在执行、等待或当前无运行实验；最新 Run ID 与真实指标；本轮新增或无新增证据；失败、阻塞与事实边界；下一步及预计到下一检查点的时间。不得把计划、代码提交、测试通过或进程存在写成实验成功。"
+status = "ACTIVE"
+rrule = "FREQ=MINUTELY;INTERVAL=10"
+target_thread_id = "01a15826-002f-7660-aeba-c394a567b2a3"
+created_at = 1792480477928
+updated_at = 1792483771148
