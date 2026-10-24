@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cinematic Audiovisual Language"
+  short_description: "Design readable cinematic shot plans with audiovisual grammar."
+  default_prompt: "Use $cinematic-audiovisual-language to turn this video idea into a clear, cinematic shot plan with audiovisual logic."

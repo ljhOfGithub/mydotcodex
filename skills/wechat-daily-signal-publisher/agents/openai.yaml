@@ -1,0 +1,6 @@
+interface:
+  display_name: "白Yu观测日更"
+  short_description: "通过135同步白Yu观测科研HTML到公众号草稿。"
+  default_prompt: "Use $wechat-daily-signal-publisher to save today's 白Yu观测 research HTML as a WeChat draft through 135 Editor."
+policy:
+  allow_implicit_invocation: true

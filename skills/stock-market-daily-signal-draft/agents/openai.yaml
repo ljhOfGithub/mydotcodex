@@ -1,0 +1,4 @@
+interface:
+  display_name: "股票市场日更稿"
+  short_description: "每天整理股票相关信号，生成白Yu观测非投资建议母版稿。"
+  default_prompt: "Use $stock-market-daily-signal-draft to prepare today’s sourced stock-market signal article for 白Yu观测."

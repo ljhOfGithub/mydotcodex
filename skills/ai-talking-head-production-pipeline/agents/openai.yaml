@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 口播成片流水线"
+  short_description: "从热点原创稿到转写、精剪、自然转场与成片验收"
+  default_prompt: "使用 $ai-talking-head-production-pipeline 把我的中文口播项目从素材整理到可验证终版。"

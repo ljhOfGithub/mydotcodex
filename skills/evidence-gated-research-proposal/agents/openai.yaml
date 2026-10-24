@@ -1,0 +1,4 @@
+interface:
+  display_name: "证据门控研究计划"
+  short_description: "撰写可防御的 proposal Word 与 Markdown"
+  default_prompt: "请起草或修订 research proposal Word 及配套 Markdown，按主张级文献边界解释术语，设计可推翻命题、决定性 pilot 和停止条件。"

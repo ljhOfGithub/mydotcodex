@@ -1,0 +1,4 @@
+interface:
+  display_name: "知乎日常信号发布"
+  short_description: "将白Yu观测公众号母版适配为知乎深读文章并真实发布"
+  default_prompt: "将公众号母版适配为知乎文章并按授权真实发布。"

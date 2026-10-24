@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Paper Search Report"
+  short_description: "Search papers and write research reports"
+  default_prompt: "Use $research-paper-search-report to search ten CS research papers about my topic, download available PDFs, deduplicate repeated runs, and write a Chinese Markdown discussion report to the paper-daily reports folder."

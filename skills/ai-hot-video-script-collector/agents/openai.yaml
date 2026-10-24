@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 热门视频口播稿"
+  short_description: "核验近期 AI 视频热度并生成原创中文口播稿"
+  default_prompt: "使用 $ai-hot-video-script-collector 联网找出当前最热的 AI 视频选题，并写成一篇可直接录制的 60 秒中文口播稿。"

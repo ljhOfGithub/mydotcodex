@@ -1,0 +1,4 @@
+interface:
+  display_name: "抖音日更发布"
+  short_description: "仅将白Yu观测合规金融观察适配并发布到抖音。"
+  default_prompt: "Use $douyin-daily-signal-publisher to publish today's compliant 白Yu观测 finance observation to Douyin."

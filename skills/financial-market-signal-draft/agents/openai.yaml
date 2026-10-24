@@ -1,0 +1,6 @@
+interface:
+  display_name: "金融市场信号稿"
+  short_description: "整理市场与宏观信号并生成非投资建议草稿"
+  default_prompt: "Use $financial-market-signal-draft to prepare a sourced market-signal WeChat draft."
+policy:
+  allow_implicit_invocation: true

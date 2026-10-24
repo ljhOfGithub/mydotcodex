@@ -1,0 +1,4 @@
+interface:
+  display_name: "B站专栏发布（已暂停）"
+  short_description: "保留白Yu观测B站永久暂停门槛与冻结队列。"
+  default_prompt: "Use $bilibili-column-daily-signal-publisher to report the paused Bilibili state without creating platform actions."

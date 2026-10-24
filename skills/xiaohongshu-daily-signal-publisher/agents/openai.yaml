@@ -1,0 +1,6 @@
+interface:
+  display_name: "小红书手动提交准备"
+  short_description: "准备白Yu观测小红书笔记并停留在最终页面，由用户手动发布"
+  default_prompt: "Use $xiaohongshu-daily-signal-publisher to prepare the note in system Chrome, select the AI-content disclosure, and stop before the final publish click."
+policy:
+  allow_implicit_invocation: true

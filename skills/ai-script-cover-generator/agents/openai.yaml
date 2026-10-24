@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 口播封面生成器"
+  short_description: "根据中文口播文案生成无人像、高点击感的短视频封面图片"
+  default_prompt: "使用 $ai-script-cover-generator 根据我的口播文案生成一张不使用真人头像的封面。"

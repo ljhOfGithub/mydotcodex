@@ -1,0 +1,4 @@
+interface:
+  display_name: "TV Binary Strategy"
+  short_description: "Convert TV indicators into all-in/all-out Pine strategies"
+  default_prompt: "Use $tradingview-indicator-to-binary-strategy to convert this TradingView indicator into a Pine v5 all-in/all-out strategy with final-bar liquidation."

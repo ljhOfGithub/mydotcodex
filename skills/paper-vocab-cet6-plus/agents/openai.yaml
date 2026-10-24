@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper CET-6+ Vocabulary"
+  short_description: "Extract paper vocabulary above CET-6 level and write a Chinese glossary."
+  default_prompt: "从给定论文或论文集合中提取难度超过中国英语六级的单词，并生成带中文含义的单词表。"

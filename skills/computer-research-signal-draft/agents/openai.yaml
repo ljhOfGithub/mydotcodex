@@ -1,0 +1,6 @@
+interface:
+  display_name: "计算机科研信号稿"
+  short_description: "单篇深读计算机论文，提炼结论、关键洞察与证据边界"
+  default_prompt: "Use $computer-research-signal-draft to prepare a one-paper, full-text grounded CS research draft that explains the source institutions, background difficulty, method, evidence, limits, conclusion, and key insights."
+policy:
+  allow_implicit_invocation: true

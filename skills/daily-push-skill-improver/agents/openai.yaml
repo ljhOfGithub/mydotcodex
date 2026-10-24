@@ -1,0 +1,6 @@
+interface:
+  display_name: "日更推送Skill复盘"
+  short_description: "复盘日常推送运行产物并小步改进对应Skill"
+  default_prompt: "Use $daily-push-skill-improver to review a daily push run and propose precise skill improvements."
+policy:
+  allow_implicit_invocation: true
