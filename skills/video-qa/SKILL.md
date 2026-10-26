@@ -227,6 +227,11 @@ rounds**, then stop and escalate. Never loop on LOW or subjective issues.
 - **Silence QA needs BOTH silencedetect AND an RMS-envelope pass**: breathy −28..−36dB
   lulls read as gaps to humans but sail under −38/−40dB silencedetect. Two real dead-air
   gaps in a shipped edit were only found by the envelope scan. See L1 reference.
+- **One muxed audio stream does not prove clean dialogue.** Two voices, duplicated narration,
+  room echo, or a bad source splice may already be baked into one AAC/PCM stream. Treat a
+  single-stream `ffprobe` result only as a routing check; still listen to the full master and
+  inspect every source-change window with a local waveform/RMS view and isolated playback.
+  Do not close an echo or overlap report from stream count alone.
 - Silence-derived cuts (a cut whose removed region was measured silence) cannot clip
   audible speech — word "overlap" there is whisper end-padding. 40 of 49 cuts false-flagged
   on a live reel before this gate existed. Only probe-confirmed misses flag.
