@@ -198,6 +198,9 @@ rounds**, then stop and escalate. Never loop on LOW or subjective issues.
 
 ## Calibration notes (from live runs)
 
+- **数字人或真人“回场”必须按连续运动验收。** 回场区间必须使用真实连续视频；有台词时口型对应，无台词时也应有自然眨眼、呼吸或手势。单张静态人物、循环缩放照片或冻结视频只能标为照片卡/定格设计，不能称为主持人回场。人物 ROI 静止但字幕、背景或进度条仍在动时，全画面 `freezedetect` 可能漏报，因此每个人物出现区间还要做逐帧条带或 ROI 运动检查。旁白继续而人物静止属于 HIGH，修复前不得交付。
+- **参考片级任务不能用九宫格代替动态验收。** 除 L1–L4 外，完整实时播放一次，以 0.5–1 秒间隔检查全片接触表，并对每个转场、人物出现/消失/缩放点检查前后连续帧。用户要求对标具体创作者时，还必须记录钩子、布局变化、人物状态、录屏可读性、字幕强调、转场和结尾的对照表；未完成对照只能标为 `draft`。
+
 - **A static full-frame takeover is a `frozen_frames` HIGH, and it reads dead to a viewer too.** A dark
   layer with two still cards passed while karaoke captions animated under it and failed the moment the
   captions were removed; a video takeover that holds on a chat bubble for ~1 s failed the same way. Give

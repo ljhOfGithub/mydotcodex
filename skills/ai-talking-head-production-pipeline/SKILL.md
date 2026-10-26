@@ -15,6 +15,7 @@ description: 把 AI/科技选题或已有中文口播原片组织成可复用的
 - 已有原片且希望不靠本人训练来改善普通话、语气或语速：先读取 [references/local-voice-redub.md](references/local-voice-redub.md)。首次合作先交付同内容、同响度的短段 A/B 试听；用户已经建立持久声音默认时，后续完整成片直接沿用该选择，不得静默退回原声。
 - 只有一条构图简单的真人口播、希望升级为动态成片：先读取 [references/simple-talking-head-dynamic-editing.md](references/simple-talking-head-dynamic-editing.md)，按其中的录制输入、语义配画、布局状态机和 Premiere/剪映路线执行。
 - 用户要求“更成熟”“减少模板感”“按专业短视频审美继续精修”，或需要解决留白、静态信息页、标题常驻、转场叠影与手机端可读性时，必须读取 [references/editorial-aesthetic-qa.md](references/editorial-aesthetic-qa.md)。
+- 使用 ChatCut 数字人、真实软件录屏、Remotion 或 HyperFrames 制作教程型口播，或用户要求对标参考博主的数字人教程时，必须读取 [references/chatcut-remotion-digital-human.md](references/chatcut-remotion-digital-human.md)。该参考同时规定 Credits 边界、人物状态、参考片对标和逐帧验收门槛。
 - 用户提供参考视频并要求字幕“更有重点”“自动高亮”或复刻其强调方式时，必须读取 [references/semantic-caption-highlighting.md](references/semantic-caption-highlighting.md)。先拆解参考样式与触发逻辑，再交付 5–12 秒样片；未经样片确认，不得直接套用到完整成片。
 - 已有粗剪：先诊断节奏、转场、音频、字幕和 B-roll 是否与口播语义匹配，再做窄改。
 - 只要封面：使用 `ai-script-cover-generator`，不启动整条视频流水线。
