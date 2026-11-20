@@ -97,10 +97,16 @@ def validate(path, video_sha256=None, stage='delivery'):
         video=bind(report['actual_video'])
         need(video_sha256 is None or sha(video)==video_sha256, '配音门绑定的不是当前MP4')
         probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','a:0','-show_entries','stream=sample_rate,channels','-of','json',str(video)]))['streams'][0]
-        need(int(probe['sample_rate'])==params.framerate and probe['channels']==params.nchannels, '配回成片时改变了采样率或声道')
+        need(int(probe['sample_rate'])==params.framerate and probe['channels'] in (params.nchannels,2), '配回成片时改变了采样率或声道')
         actual=subprocess.run(['ffmpeg','-nostdin','-v','error','-xerror','-i',str(video),'-map','0:a:0','-c:a','pcm_s16le','-f','s16le','-'],capture_output=True,check=True).stdout
+        mapping='unchanged'
+        if params.nchannels==1 and probe['channels']==2:
+            from array import array
+            channels=array('h');channels.frombytes(actual)
+            need(channels[::2]==channels[1::2], '复制单声道后左右采样不同')
+            actual=channels[::2].tobytes();mapping='mono_to_identical_dual_mono'
         need(len(actual)>=len(pcm) and actual[:len(pcm)]==pcm and not any(actual[len(pcm):]), '最终成片声音与获批整轨不再逐采样相同，须恢复原音；有损相似度不能替代')
-        result.update(status='PASS',video_sha256=sha(video),bit_exact_approved_pcm=True)
+        result.update(status='PASS',video_sha256=sha(video),bit_exact_approved_pcm=True,channel_mapping=mapping)
     return result
 
 def main():
