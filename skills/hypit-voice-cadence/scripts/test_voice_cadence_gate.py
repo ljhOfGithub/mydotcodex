@@ -50,6 +50,16 @@ class Tests(unittest.TestCase):
     def test_context_extra_word_rejected_with_spaces(self):
         self.report['generation_groups'][1]['context_text']='第一句！ 第二句！ 错词 第三句！'
         with self.assertRaises(ValueError):self.run_gate()
+    def test_identical_dual_mono_preserves_each_approved_sample(self):
+        out=self.root/'dual.mp4'
+        subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(self.video),'-af','pan=stereo|c0=c0|c1=c0','-c:v','copy','-c:a','flac','-strict','experimental',str(out)],check=True)
+        self.report['actual_video']=self.bound(out)
+        self.assertEqual(self.run_gate()['channel_mapping'],'mono_to_identical_dual_mono')
+    def test_dual_mono_must_not_change_gain(self):
+        out=self.root/'attenuated.mp4'
+        subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(self.video),'-af','pan=stereo|c0=0.7*c0|c1=0.7*c0','-c:v','copy','-c:a','flac','-strict','experimental',str(out)],check=True)
+        self.report['actual_video']=self.bound(out)
+        with self.assertRaises(ValueError):self.run_gate()
     def test_valid_full_chain(self):self.assertTrue(self.run_gate()['bit_exact_approved_pcm'])
     def test_before_render_does_not_require_video(self):
         self.report.pop('actual_video');self.assertEqual(self.run_gate('voice_ready')['status'],'VOICE_READY')
