@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 import subprocess
 import wave
@@ -14,6 +15,10 @@ def need(ok, message):
 
 def sha(path):
     with path.open('rb') as stream: return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+def spoken_text(text):
+    # 仅忽略分句空白；不删除标点、表演提示或任何口播字符。
+    return re.sub(r'\s+', '', text)
 
 def wav(path):
     with wave.open(str(path), 'rb') as stream:
@@ -72,12 +77,12 @@ def validate(path, video_sha256=None, stage='delivery'):
         ids = group['sentence_ids']; covered.extend(ids)
         need(ids and ids == list(range(ids[0],ids[-1]+1)) and all(1 <= i <= len(sentences) for i in ids), '生成语义段编号无效')
         target = ''.join(sentences[i-1] for i in ids)
-        need(group['target_text'] == target and group['model']=='VoxCPM2' and group['voice_reference_sha256']==sha(voice_reference), '生成文本、模型或本人声源失配')
+        need(spoken_text(group['target_text']) == spoken_text(target) and group['model']=='VoxCPM2' and group['voice_reference_sha256']==sha(voice_reference), '生成文本、模型或本人声源失配')
         raw = bind(group['audio']); bind(group['generation_evidence'])
         need(group.get('tempo_rate')==1 and group.get('pitch_shift_semitones')==0 and group.get('gain')==1 and group.get('formant_shift') is False, '节奏必须在生成时形成，禁止后期拉伸、移调或改增益')
         if index:
-            need(group['mode']=='continuation' and bind(group['context_audio'])==opening and group['context_text']==groups[0]['target_text'], '后文须沿用本轮开头的本人声音和对应文本续接')
-            need(group['api_text']==target, '续接text只能是纯口播；禁止把表演指令拼到前面或混入正文')
+            need(group['mode']=='continuation' and bind(group['context_audio'])==opening and spoken_text(group['context_text'])==spoken_text(groups[0]['target_text']), '后文须沿用本轮开头的本人声音和对应文本续接')
+            need(spoken_text(group['api_text'])==spoken_text(target), '续接text只能是纯口播；禁止把表演指令拼到前面或混入正文')
         asr = json.loads(bind(group['independent_asr']).read_text())
         need(asr.get('audio_sha256')==sha(raw) and bool(asr.get('recognized','').strip()) and asr.get('content_verified') is True, '必须另做独立转写核对内容，不能拿强制对齐证明没有多读文字')
         for token in ('延续前文','表演指令','抬高后收住','不额外重读'):
