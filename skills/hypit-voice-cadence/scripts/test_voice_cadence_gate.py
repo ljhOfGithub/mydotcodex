@@ -40,6 +40,16 @@ class Tests(unittest.TestCase):
     def bound(self,path):return {'path':str(path),'sha256':gate.sha(path)}
     def run_gate(self,stage='delivery'):
         path=self.root/'report.json';path.write_text(json.dumps(self.report,ensure_ascii=False));return gate.validate(path,stage=stage)
+    def test_sentence_spacing_preserves_same_spoken_text(self):
+        self.report['generation_groups'][0]['target_text']='第一句！ 第二句！ 第三句！'
+        self.report['generation_groups'][1]['context_text']='第一句！ 第二句！ 第三句！'
+        self.assertEqual(self.run_gate()['status'],'PASS')
+    def test_whitespace_does_not_erase_direction_or_content(self):
+        self.report['generation_groups'][1]['api_text']=' 延续前文 后文。'
+        with self.assertRaises(ValueError):self.run_gate()
+    def test_context_extra_word_rejected_with_spaces(self):
+        self.report['generation_groups'][1]['context_text']='第一句！ 第二句！ 错词 第三句！'
+        with self.assertRaises(ValueError):self.run_gate()
     def test_valid_full_chain(self):self.assertTrue(self.run_gate()['bit_exact_approved_pcm'])
     def test_before_render_does_not_require_video(self):
         self.report.pop('actual_video');self.assertEqual(self.run_gate('voice_ready')['status'],'VOICE_READY')

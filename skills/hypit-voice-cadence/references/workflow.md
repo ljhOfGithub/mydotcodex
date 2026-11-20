@@ -43,3 +43,5 @@
 - `actual_video` 在交付阶段绑定当前MP4；`voice_ready` 不要求尚未生成的成片。
 
 工作区口播清单必须设 `creation_mode=reference_recreation` 或 `original`。复刻时 `narration.reference_cadence_qa` 绑定本报告；缺项、失败或哈希变化阻止Hypit交付。原创片不套原片要求，无旁白MV不套本人配音要求。合成回归夹具只验证程序，不能当真实听检证据。
+
+句间空格只用于避免强制对齐跨句合词。配音门仅在文本比较时忽略空白字符，生成请求原始文本、文件及哈希照实保留；标点、提示词和口播字符不得删改。
