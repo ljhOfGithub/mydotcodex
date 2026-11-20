@@ -1,0 +1,799 @@
+{
+  "format": "upstream-skill-snapshot@1",
+  "upstream": "https://github.com/heygen-com/hyperframes",
+  "upstream_commit": "未从初始化安装结果取得提交号，不推测",
+  "snapshot_date": "2026-11-21",
+  "skills": [
+    "hyperframes-cli",
+    "hyperframes-registry",
+    "media-use"
+  ],
+  "archive_sha256": "d442163b4b594a049e99c0539f43f4770dd9512327038b4501f2cba154f0b217",
+  "files": [
+    {
+      "path": "hyperframes-cli/SKILL.md",
+      "sha256": "15b47980da048017e715effb6300577454e934cc9a88b091018a98863209ce89",
+      "bytes": 7744
+    },
+    {
+      "path": "hyperframes-cli/references/beats.md",
+      "sha256": "795f67b5c3fa680968a43e6482685fd55a0adb555d179643bfcb7989d251e69a",
+      "bytes": 992
+    },
+    {
+      "path": "hyperframes-cli/references/cloud.md",
+      "sha256": "31f23ab377e9dcfb137940ee69be0cb579c970a4a2a4401653ffe65a7ded513c",
+      "bytes": 13272
+    },
+    {
+      "path": "hyperframes-cli/references/cloudrun.md",
+      "sha256": "16f46a18ee3d165dba3b7ee50362bb32cb0a927643a90821e7b63494fe0bde83",
+      "bytes": 3553
+    },
+    {
+      "path": "hyperframes-cli/references/compare-and-batch.md",
+      "sha256": "d17fa5a16707d981fa6473b99a28aa45abf41bca0fd96c5157c632abd0bfc222",
+      "bytes": 4378
+    },
+    {
+      "path": "hyperframes-cli/references/conventions.md",
+      "sha256": "5012403aa194bc350bdfd89d7c9f00e85c0ecc0356a1417ae4146b7bb8bb7b07",
+      "bytes": 2092
+    },
+    {
+      "path": "hyperframes-cli/references/doctor-browser.md",
+      "sha256": "b794615b597ed85b1aec9575d1aea3e01eab561e743c80f31ecfc6a99e528c14",
+      "bytes": 4411
+    },
+    {
+      "path": "hyperframes-cli/references/feedback.md",
+      "sha256": "ae188d5c3e90f0e011b1e322bbfbe10575667b2a5073cffdac05026ac59925a7",
+      "bytes": 2539
+    },
+    {
+      "path": "hyperframes-cli/references/init-and-scaffold.md",
+      "sha256": "3932ea29b3604dd76f9e6f93642e4e180999ecb7b3fdf4499443bfc38db82c9f",
+      "bytes": 6792
+    },
+    {
+      "path": "hyperframes-cli/references/lambda.md",
+      "sha256": "6e07cfb291e277ebce7bcc244aac8859b1f639e78df24a8ecadc2c913ba5bc23",
+      "bytes": 18063
+    },
+    {
+      "path": "hyperframes-cli/references/lint-validate-inspect.md",
+      "sha256": "5a0198691f1a5fdcbf31286a2e7838eda3640f131a292f737a90bc78cfda60eb",
+      "bytes": 20082
+    },
+    {
+      "path": "hyperframes-cli/references/preview-render.md",
+      "sha256": "6408e1975436fc78da1c00cfd962df88e47b72765560cf0b93924a44bf2755e5",
+      "bytes": 36764
+    },
+    {
+      "path": "hyperframes-cli/references/upgrade-info-misc.md",
+      "sha256": "68a5a0f52d20248cbee60cc3da14a0028e7bf6b6b13d6f2d06002552ef54b1c6",
+      "bytes": 11896
+    },
+    {
+      "path": "hyperframes-registry/SKILL.md",
+      "sha256": "70289ff0cfda09de2f58f30e9ba1ffbcc54308a5357bef6a7345100c8ab26842",
+      "bytes": 4640
+    },
+    {
+      "path": "hyperframes-registry/examples/add-block.md",
+      "sha256": "0e3353755c4ef55e53570d1266a4a43b2c5aef9bbe41276430e38cfa6580b83a",
+      "bytes": 1232
+    },
+    {
+      "path": "hyperframes-registry/examples/add-component.md",
+      "sha256": "d06992d31eec617a91f5c34630c9274c52dd07898bd24f10a869d0d1cab5af29",
+      "bytes": 1473
+    },
+    {
+      "path": "hyperframes-registry/references/component-quality-bar.md",
+      "sha256": "f0d4c3c44131bc0791f8a8cc3d2d7478d38045451775af7d20b2dd47cf5f91ac",
+      "bytes": 16390
+    },
+    {
+      "path": "hyperframes-registry/references/contributing.md",
+      "sha256": "5ff53e401e4eac0ddc3b974d3da7c2c0f6850c5d174ff8a58f504a168a3f5b38",
+      "bytes": 7343
+    },
+    {
+      "path": "hyperframes-registry/references/demo-html-pattern.md",
+      "sha256": "dfc50cd33eff2c2be75437786fc3e851ab0085f7d453fb35b3380ecf9a6e9f04",
+      "bytes": 1884
+    },
+    {
+      "path": "hyperframes-registry/references/discovery.md",
+      "sha256": "ca82fcc1e0b2d824b72a8bda99b60d257b23d493fa1d28adbb0548a762cacd04",
+      "bytes": 16593
+    },
+    {
+      "path": "hyperframes-registry/references/install-locations.md",
+      "sha256": "83793e7d6aeea9a751755e4bd23ea48182ff9af082287b98a1192343d2571dd1",
+      "bytes": 1519
+    },
+    {
+      "path": "hyperframes-registry/references/placeholder-material.md",
+      "sha256": "15adf4a40b26166f64df784aed065adb58051d9ccd5c0c52ad9b71e3b8367a09",
+      "bytes": 9006
+    },
+    {
+      "path": "hyperframes-registry/references/search.md",
+      "sha256": "3da7b42d2a0d8d9e2cbcdd8591da5a83203c424de9f46a995950d374a74531ee",
+      "bytes": 9416
+    },
+    {
+      "path": "hyperframes-registry/references/templates.md",
+      "sha256": "98e1ef62d3c1264b28139d85a1c9b5a8b7438209914aebef6d9890e3f4275805",
+      "bytes": 11451
+    },
+    {
+      "path": "hyperframes-registry/references/wiring-blocks.md",
+      "sha256": "34bf92a4d98c2535f699c141f3df4de4697353e95067d5e6b14a4a6cbb1b651a",
+      "bytes": 2656
+    },
+    {
+      "path": "hyperframes-registry/references/wiring-components.md",
+      "sha256": "6c8341c29fdae6de4f9fd1560a668d11cf34731b81fe5a06c9aeb4a000047b2a",
+      "bytes": 1723
+    },
+    {
+      "path": "media-use/.gitignore",
+      "sha256": "a299ec0fcdb6bc6670cf9fb22eefe3fcc37730e2e554b7f54e25de88be1ede02",
+      "bytes": 17
+    },
+    {
+      "path": "media-use/SKILL.md",
+      "sha256": "2eef0b69ab75e54481ff73b6617b70cb0b7ac620a993e7996248c3a80fee558e",
+      "bytes": 5451
+    },
+    {
+      "path": "media-use/audio/assets/sfx/CREDITS.md",
+      "sha256": "79590c7738b0427b10f362f76b02cfd2643158a40e1d5fd787f9ac6b33bcf4ce",
+      "bytes": 1183
+    },
+    {
+      "path": "media-use/audio/assets/sfx/chime.mp3",
+      "sha256": "74823b1b27703c56e0652db838f503c150ce9c2442d47d27430af3d5121d6d12",
+      "bytes": 27309
+    },
+    {
+      "path": "media-use/audio/assets/sfx/click-soft.mp3",
+      "sha256": "075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d",
+      "bytes": 11702
+    },
+    {
+      "path": "media-use/audio/assets/sfx/click.mp3",
+      "sha256": "075e17bdac5c13662a1c9530050e0046f81d4138e00eb3bf30427a7b4404103d",
+      "bytes": 11702
+    },
+    {
+      "path": "media-use/audio/assets/sfx/error.mp3",
+      "sha256": "b4882e3941ca496b5038e7c7d64318419da9f69d3da9540a1c693adc639cf121",
+      "bytes": 51827
+    },
+    {
+      "path": "media-use/audio/assets/sfx/glitch-1.mp3",
+      "sha256": "760b72bdaad71f83350e2ef3a9d037daf58f44855a05a6cce25d990f1ffb888a",
+      "bytes": 84427
+    },
+    {
+      "path": "media-use/audio/assets/sfx/glitch-2.mp3",
+      "sha256": "b326efdf687f18f68f0df7443a65b0ea7a4a1287dfe3143ea23707cc645257f1",
+      "bytes": 112128
+    },
+    {
+      "path": "media-use/audio/assets/sfx/glitch-3.mp3",
+      "sha256": "7ebe61cfd0d69a2d35d9ee3a88c26025101e999d5cc6bfb2df410f820b433042",
+      "bytes": 99072
+    },
+    {
+      "path": "media-use/audio/assets/sfx/impact-bass-1.mp3",
+      "sha256": "634d5eda5eb7b501aca98393a64f3815eccf24157cd1d95df55aaec1b5000bd7",
+      "bytes": 67709
+    },
+    {
+      "path": "media-use/audio/assets/sfx/impact-bass-2.mp3",
+      "sha256": "fb832995477784f44ba8533359d20caf706195b52117ecc2a33b3e63e3c1307b",
+      "bytes": 82944
+    },
+    {
+      "path": "media-use/audio/assets/sfx/key-press.mp3",
+      "sha256": "bcc892df0898bf466162f14233c3e92a8c1ea351f6affd8a3a7e56c9a760bb72",
+      "bytes": 3909
+    },
+    {
+      "path": "media-use/audio/assets/sfx/manifest.json",
+      "sha256": "1b1aae06c6e25412e1d217ebf1e646a0ed36410c0fcad11acdb8f5d5e5b7dc10",
+      "bytes": 3721
+    },
+    {
+      "path": "media-use/audio/assets/sfx/notification.mp3",
+      "sha256": "b1559967dedb7994a82371f10cec9f7f3992e6b147b4cd88d62112bcdc3f9ba3",
+      "bytes": 78576
+    },
+    {
+      "path": "media-use/audio/assets/sfx/ping.mp3",
+      "sha256": "c54d088fa2709e6b3c9ce87594a9187d0d5338d3a8c683271f9c4353a8ee8c91",
+      "bytes": 26400
+    },
+    {
+      "path": "media-use/audio/assets/sfx/pop.mp3",
+      "sha256": "19ab7193f626ff57fdeef60b45543bac416fcbcec803cfb417abe4b271c1b352",
+      "bytes": 23040
+    },
+    {
+      "path": "media-use/audio/assets/sfx/riser.mp3",
+      "sha256": "d2f29d49f27dee7d3b25af22ffe5bebc39390cc5d5fb3b3e1c433499c77f3d1d",
+      "bytes": 321024
+    },
+    {
+      "path": "media-use/audio/assets/sfx/sparkle.mp3",
+      "sha256": "a66b2829a307bcb5b1f6551d7cdc72fe45bbe9a91abfb994d28db8d5e4e42ea8",
+      "bytes": 57678
+    },
+    {
+      "path": "media-use/audio/assets/sfx/typing.mp3",
+      "sha256": "944160652faeb7b32acc9341ede4d735a5c9a4ce3fe8509ef7eab91efb430487",
+      "bytes": 26852
+    },
+    {
+      "path": "media-use/audio/assets/sfx/whoosh-cinematic.mp3",
+      "sha256": "0a0f3505856fdfa84ac6b86b3c55ccd0ef1eb4ff0907d7b6934002218a73404e",
+      "bytes": 177408
+    },
+    {
+      "path": "media-use/audio/assets/sfx/whoosh-short.mp3",
+      "sha256": "c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30",
+      "bytes": 18390
+    },
+    {
+      "path": "media-use/audio/assets/sfx/whoosh.mp3",
+      "sha256": "c2efd9d902a59bf9ec5019035d7deadd17762136896b6e3cb6dd99ea50997a30",
+      "bytes": 18390
+    },
+    {
+      "path": "media-use/audio/references/bgm.md",
+      "sha256": "49c9d4d8b733e9c0d80e084be35c99432e2accc1c57266b3f01c3155e0acc47e",
+      "bytes": 8128
+    },
+    {
+      "path": "media-use/audio/references/captions/authoring.md",
+      "sha256": "c1f159e6a99b5ed65812fbc777fabdbf8cb82dec7fcb2e970b9524653d96bb59",
+      "bytes": 9422
+    },
+    {
+      "path": "media-use/audio/references/captions/motion.md",
+      "sha256": "ee1b89fc53e7433e1c1192c24e09365a3894bae653d8061c2bbc4202c097250f",
+      "bytes": 5480
+    },
+    {
+      "path": "media-use/audio/references/captions/transcript-handling.md",
+      "sha256": "84c4d5181749022c00b6de62ffe95fe257598fb5f9111d9e8541d25a13836287",
+      "bytes": 5439
+    },
+    {
+      "path": "media-use/audio/references/remove-background.md",
+      "sha256": "fb6b38a25c6535c57a461bbe2ca681b38f18e5f09b1e904e4a0b5f6eca7a5b98",
+      "bytes": 8472
+    },
+    {
+      "path": "media-use/audio/references/requirements.md",
+      "sha256": "d0891f4a4c24cd47c4bcb57cad28418e496403a377c51eafed709bc094133eea",
+      "bytes": 4799
+    },
+    {
+      "path": "media-use/audio/references/sfx.md",
+      "sha256": "b89b14e4d819594d07cf2899e3ca59ceafe743e77e7df46dafdbebe4effebe75",
+      "bytes": 4137
+    },
+    {
+      "path": "media-use/audio/references/transcribe.md",
+      "sha256": "5525a555f5356766a5e3333a945b5f90af51f63b2b98210d23e3a605a5de8703",
+      "bytes": 2847
+    },
+    {
+      "path": "media-use/audio/references/tts-to-captions.md",
+      "sha256": "15453b0400d145da7467c951b23c21ca01bfaa9339017516b731fed36cd663dd",
+      "bytes": 1750
+    },
+    {
+      "path": "media-use/audio/references/tts.md",
+      "sha256": "a1645f76a995b16053080c7fdc4606cfac6fbdc4638d7c29b92a5126754e4cf2",
+      "bytes": 14175
+    },
+    {
+      "path": "media-use/audio/scripts/audio.mjs",
+      "sha256": "8904ff0d5380953eecdbcd724a0b5c80d1292f269ff113c6276059ae81a0cd17",
+      "bytes": 15867
+    },
+    {
+      "path": "media-use/audio/scripts/audio.test.mjs",
+      "sha256": "bcb3c631afe2280fc7c54de198d78897c1d5ebefd9031175d3d1bd137c2a8ffc",
+      "bytes": 12414
+    },
+    {
+      "path": "media-use/audio/scripts/carve.mjs",
+      "sha256": "1ae83aeac13226b94bc3e7e97e9d1c7e4109dfc6f1ae961714c223fb896d3488",
+      "bytes": 20609
+    },
+    {
+      "path": "media-use/audio/scripts/carve.test.mjs",
+      "sha256": "9d45276eb50f709042db34d7fe50b6f91c929489adf5bf6d73d40ddabf141cd9",
+      "bytes": 12511
+    },
+    {
+      "path": "media-use/audio/scripts/extract-audio-data.py",
+      "sha256": "5ef8c22de6477f6c847c2069955046b4334fb4de4ebdec5ef7e8ce90d2fadc14",
+      "bytes": 7270
+    },
+    {
+      "path": "media-use/audio/scripts/gemini-pipeline.test.mjs",
+      "sha256": "994d02861e3822ee9ec389778351eb681f21a662b920cb6e787e035df6fbff09",
+      "bytes": 4942
+    },
+    {
+      "path": "media-use/audio/scripts/heygen-tts.mjs",
+      "sha256": "0164ac8c32ad54b8000bd2fbe7ba2fc77295d7a9014b80991482f5dad2a7bc2c",
+      "bytes": 4549
+    },
+    {
+      "path": "media-use/audio/scripts/heygen-tts.test.mjs",
+      "sha256": "55f54468f0ba01f24c7a587f1b58d7d128a9c03919dfadd92dc2929aa1e8ed69",
+      "bytes": 1408
+    },
+    {
+      "path": "media-use/audio/scripts/heygen-voice.mjs",
+      "sha256": "1ab6d29860c106b49ca0c3dec408d99a8d3297a5bbc953d21f1148c3d8568064",
+      "bytes": 3859
+    },
+    {
+      "path": "media-use/audio/scripts/heygen-voice.test.mjs",
+      "sha256": "d0920895246ee7679a424ffa36ed13d3f1bb7c03b8641c8bbb4a4efd4ede320b",
+      "bytes": 8536
+    },
+    {
+      "path": "media-use/audio/scripts/lib/audio-carve.mjs",
+      "sha256": "f4438df74a93c1620488f7a8c8121eebccfb71b34ff1ead06f1e6f307b1ed5b8",
+      "bytes": 16991
+    },
+    {
+      "path": "media-use/audio/scripts/lib/audio-meta.mjs",
+      "sha256": "94e1b4cf242362eeb52bb8a5665b5b50fe4ffdc7854f4366b82e290c33d03890",
+      "bytes": 1166
+    },
+    {
+      "path": "media-use/audio/scripts/lib/audio-meta.test.mjs",
+      "sha256": "e6627824e12aec0c19c7d6f28cd8445ed6a341c846b873f467337e1af96e0e7a",
+      "bytes": 4591
+    },
+    {
+      "path": "media-use/audio/scripts/lib/bgm-volume.mjs",
+      "sha256": "bb9debebdbd09724f6d07cd10b3982a076639664420ff8caf5f5a36ae7429a8c",
+      "bytes": 236
+    },
+    {
+      "path": "media-use/audio/scripts/lib/bgm.mjs",
+      "sha256": "50d6bb4ec96a5cf67f23236a9e81fccf69a4a36f5c1853cebb15f380d6c4852c",
+      "bytes": 12072
+    },
+    {
+      "path": "media-use/audio/scripts/lib/bgm.test.mjs",
+      "sha256": "9d13e2f0a2fcb0890364f1bad61b25c2ae503c836bcc9d80ef980c359ac05929",
+      "bytes": 7100
+    },
+    {
+      "path": "media-use/audio/scripts/lib/concurrency.mjs",
+      "sha256": "36a28dc1a0528b5605cba29a593dd54a786ad6283611b09a634946b12a5ed32e",
+      "bytes": 527
+    },
+    {
+      "path": "media-use/audio/scripts/lib/concurrency.test.mjs",
+      "sha256": "daf0b162a9c3fc1a20cc22dff19566530e198459a10afcdf42ad39bec2426f55",
+      "bytes": 1654
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-auth.mjs",
+      "sha256": "e549d41642c0e13881d70fccb885ca0bf9a41e4db53a29a7d12443ef6413503f",
+      "bytes": 1890
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-auth.py",
+      "sha256": "5ba85af3b5b46bfa04013f5d24b2c5b72dc7677b6cc5ef5ef926de82be4f8542",
+      "bytes": 1981
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-auth.test.mjs",
+      "sha256": "c63b96606de89bfa98309511d28938b8349341fd85de6138a73881f1a5e0e98a",
+      "bytes": 4675
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-auth_test.py",
+      "sha256": "5f524492aa5d4fa77c45bfed0002a33045677bd1c28027ff80554c9911f32b66",
+      "bytes": 4430
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-tts.mjs",
+      "sha256": "bf003704ac37e81a9e1b500103691c37670f9ff556e1dde3062e2e87873ef914",
+      "bytes": 5142
+    },
+    {
+      "path": "media-use/audio/scripts/lib/gemini-tts.test.mjs",
+      "sha256": "68b3fae36ec470a7c1dc67fc340239af76495c5d3ae5ae26db14bbd7cfc7f5fc",
+      "bytes": 9426
+    },
+    {
+      "path": "media-use/audio/scripts/lib/heygen.mjs",
+      "sha256": "95bf08a065f5ede0bb947713d11886d6341c2f529e48f06f83a2bf2ae7e6b9ba",
+      "bytes": 19306
+    },
+    {
+      "path": "media-use/audio/scripts/lib/heygen.test.mjs",
+      "sha256": "66fb3bec5e426e226221099457e83fde879dfe817fd8ac1f5df2ed602d8b0163",
+      "bytes": 35510
+    },
+    {
+      "path": "media-use/audio/scripts/lib/main-module.mjs",
+      "sha256": "61811e09110856e1439c29875e4a4ad7701ae45d4045f9d1dcb6a7929698e4c0",
+      "bytes": 479
+    },
+    {
+      "path": "media-use/audio/scripts/lib/media-record.mjs",
+      "sha256": "70dc13952b6edd363a27866a9275174bd4aca4b1ce2281e1ba09edbb02c6158f",
+      "bytes": 5182
+    },
+    {
+      "path": "media-use/audio/scripts/lib/media-record.test.mjs",
+      "sha256": "c73d535f2a10f56e982155fd6d357d047818998d7553860772e17180c1d8fc6d",
+      "bytes": 12937
+    },
+    {
+      "path": "media-use/audio/scripts/lib/openverse.mjs",
+      "sha256": "e2b176ed6e0b91231debab84ef6633a1a4885e400b9511a39f11e97acef261bd",
+      "bytes": 4999
+    },
+    {
+      "path": "media-use/audio/scripts/lib/project-path.mjs",
+      "sha256": "ce4962e06ee34c9588d4067ddabcfd640a9bea35bf155e1b25ee635cbb22f81a",
+      "bytes": 2285
+    },
+    {
+      "path": "media-use/audio/scripts/lib/project-path.test.mjs",
+      "sha256": "61aeae52e51d95fe4a9caf646534b3670c54043bd3d8eb67a6b968ca1accc388",
+      "bytes": 3096
+    },
+    {
+      "path": "media-use/audio/scripts/lib/python.mjs",
+      "sha256": "576765c574f5cd94b4b6be515ae9bef871e558d166bbefdf34bfb29a92c2a1df",
+      "bytes": 4663
+    },
+    {
+      "path": "media-use/audio/scripts/lib/python.test.mjs",
+      "sha256": "089ccfc875f7df34f7ee109147b0d1c3b39152029b0ae5a798ff3aad661de398",
+      "bytes": 8030
+    },
+    {
+      "path": "media-use/audio/scripts/lib/recording.mjs",
+      "sha256": "74bdb99826b8e962da53f2379173dc1aacb197145a2757f8ad1be03ca8927f31",
+      "bytes": 4539
+    },
+    {
+      "path": "media-use/audio/scripts/lib/sfx.mjs",
+      "sha256": "5c443cdf72bf14552f23a468e311b273e1448b49aeca385f2484995217f75d3f",
+      "bytes": 7372
+    },
+    {
+      "path": "media-use/audio/scripts/lib/sfx.test.mjs",
+      "sha256": "87bc81631a1dae1e251e13bb219521815f1cc14f7ec30b8d29b38885138f360d",
+      "bytes": 11893
+    },
+    {
+      "path": "media-use/audio/scripts/lib/tts.cleanup.test.mjs",
+      "sha256": "6264e7c39ae5e4c2f27d2727f31de2b957e36339ed257dc4f4b984eedf3c7f85",
+      "bytes": 7141
+    },
+    {
+      "path": "media-use/audio/scripts/lib/tts.mjs",
+      "sha256": "a3eb1db68b2fe8ea76ab6b5fc04efa17462b4345cf6601a474fab90f2d1a41d6",
+      "bytes": 19209
+    },
+    {
+      "path": "media-use/audio/scripts/lib/tts.spawn.test.mjs",
+      "sha256": "40299540bdc679bae3c616418a156c64664fbf737d3e3e2198071e56c3cd1a57",
+      "bytes": 6147
+    },
+    {
+      "path": "media-use/audio/scripts/lib/tts.test.mjs",
+      "sha256": "91713e4eea55f1cb595039bae29a483614f88f9a87d266ea278c590a76188525",
+      "bytes": 10483
+    },
+    {
+      "path": "media-use/audio/scripts/lib/voice-credit.mjs",
+      "sha256": "16a45db14f36ba557654f8104df09481e9d34234aebcb4cdc1ff5213bed3d4e5",
+      "bytes": 686
+    },
+    {
+      "path": "media-use/audio/scripts/lib/voice-credit.test.mjs",
+      "sha256": "c7f3fccb3767b702ee3e99643fe8a44fa255c5a95999aef1535be6455cd2bd5a",
+      "bytes": 946
+    },
+    {
+      "path": "media-use/audio/scripts/lyria-recipe.py",
+      "sha256": "07bcba4a128430545a03e7ced49b9a6750a77d72a3659d67e4e9886fe9731436",
+      "bytes": 5023
+    },
+    {
+      "path": "media-use/audio/scripts/recording.test.mjs",
+      "sha256": "5cdd3402fcab5a722bf331b71b198064fd1a5cb769d4871de7f6e7ada25b0f68",
+      "bytes": 9397
+    },
+    {
+      "path": "media-use/audio/scripts/trusted-program.test.mjs",
+      "sha256": "00187804c173b1325ac1a7c30e3834bb9fe73d0f75f9516d3de4abb5f201baea",
+      "bytes": 3436
+    },
+    {
+      "path": "media-use/audio/scripts/trusted_program.py",
+      "sha256": "9f73bb01cb9a85ec9968d7b4868338725d19592d347401e65d595bbce4e38f33",
+      "bytes": 2829
+    },
+    {
+      "path": "media-use/audio/scripts/wait-bgm.mjs",
+      "sha256": "4f85ccad1d3b404f6818212af4f498d14e5907e4e2f682a6d62f6d53d56f56a4",
+      "bytes": 6553
+    },
+    {
+      "path": "media-use/audio/scripts/wait-bgm.test.mjs",
+      "sha256": "80dc1ffa68bbb97f11e07bdd2e20088bd1e931460802df2b0a9102635285d62d",
+      "bytes": 10164
+    },
+    {
+      "path": "media-use/luts/README.md",
+      "sha256": "c06cbbf2aab80cbf8aa25c83497202a63107a61e083b6c199a89d513e8096a3b",
+      "bytes": 1087
+    },
+    {
+      "path": "media-use/luts/index.json",
+      "sha256": "988ac83c14bc3a9ef09aa6ab64459a0aa9e766e96361738136970ec89df1675a",
+      "bytes": 1997
+    },
+    {
+      "path": "media-use/references/audio.md",
+      "sha256": "b41de88dfb543530c708911110af777cd579a1bec92584bb779d627ea5b86a12",
+      "bytes": 3554
+    },
+    {
+      "path": "media-use/references/grading.md",
+      "sha256": "430e2b57dfb64c3acfbdd02317ba967ebb580d42b348686ccffbc175d3de8392",
+      "bytes": 7150
+    },
+    {
+      "path": "media-use/references/heygen.md",
+      "sha256": "9cf82c08f1a114a788c358c79c61c09293089b9314f7f1023fc7388ffbcc6f98",
+      "bytes": 12093
+    },
+    {
+      "path": "media-use/references/local.md",
+      "sha256": "659271d787fe3bdd39f0bc32b1eeb03860b9c76c2672cb71b6bb8d4a88fe4385",
+      "bytes": 2626
+    },
+    {
+      "path": "media-use/references/media-treatment-recipes.md",
+      "sha256": "852e7e978af56c9e99ba14f19009da974cd78f99b399ca194dc416c31c49bda5",
+      "bytes": 35868
+    },
+    {
+      "path": "media-use/references/media-treatments.md",
+      "sha256": "32b9b3bb6fb3838829ff08dc5650b2eb065086b4bd5db9c431e9629a38e93385",
+      "bytes": 14151
+    },
+    {
+      "path": "media-use/references/memory.md",
+      "sha256": "55477edafb7f9c8294cafd3f1633b7a1820d538695c0868f9c3ddb6b418dadbc",
+      "bytes": 3828
+    },
+    {
+      "path": "media-use/references/meta.md",
+      "sha256": "3651b66e86874b21e9636de65be5a4581f4f394f3c8fc02ddc9128f4dcfa107c",
+      "bytes": 6545
+    },
+    {
+      "path": "media-use/references/mixing.md",
+      "sha256": "b9a96f6a35b06c613f7a731e0b9db9e334acbb8c026ba44f9ce1ca70dec7a3de",
+      "bytes": 4597
+    },
+    {
+      "path": "media-use/references/operations.md",
+      "sha256": "e5a52fe98376a1215680dec8c6393f6d5b55055ecdcfb7d07db356904c518603",
+      "bytes": 16153
+    },
+    {
+      "path": "media-use/references/resolve.md",
+      "sha256": "676115ab007793b127ab535c7b26ea1bd3a0a10c21806ceaf595b92eb15b3c2c",
+      "bytes": 10100
+    },
+    {
+      "path": "media-use/references/setup-providers.md",
+      "sha256": "5cc3c135398435afa6a06e3ba533da871c07d7c5aa2a4dd4d4d5520c119f284b",
+      "bytes": 9331
+    },
+    {
+      "path": "media-use/references/telemetry-dashboard.md",
+      "sha256": "bdc30ad1ff84ebe7f5ca835acb9f47b33717e041ea79b41c6f0db489b86094a7",
+      "bytes": 4200
+    },
+    {
+      "path": "media-use/scripts/audio-duck.mjs",
+      "sha256": "829ec336c53c25b2629ef551cb990264e478a3a131a43a90d50f474de47ed741",
+      "bytes": 4189
+    },
+    {
+      "path": "media-use/scripts/compatibility.test.mjs",
+      "sha256": "3263a2e82b06560d2c0ea9f7e41b3fe46bec624b70c539ccb121b880dae2250e",
+      "bytes": 1610
+    },
+    {
+      "path": "media-use/scripts/dither.mjs",
+      "sha256": "c01d7b8d8a6d671ebb2fef3900bbbdd9f0d536821c87b493c30832cbdee322d2",
+      "bytes": 10133
+    },
+    {
+      "path": "media-use/scripts/dither.test.mjs",
+      "sha256": "c22c3a0ae41647ac3f733b489a6bc6043fd294155d00954be5d901b3cff7d216",
+      "bytes": 4723
+    },
+    {
+      "path": "media-use/scripts/eval.mjs",
+      "sha256": "7627a734cad20cbe2c66af1c7530feac3f7152e7eb70b41aef0aee1ac7e4eb7f",
+      "bytes": 14930
+    },
+    {
+      "path": "media-use/scripts/lib/config-lock.mjs",
+      "sha256": "a9d1679e2039be38cd1756a1011f813ae4be0577c2ff77b9ed411b99b1c94275",
+      "bytes": 1520
+    },
+    {
+      "path": "media-use/scripts/lib/credit-limit.mjs",
+      "sha256": "a3631bb426d64b73ac37c17ad63d10a01237a2810510762db5151634a17c047e",
+      "bytes": 2243
+    },
+    {
+      "path": "media-use/scripts/lib/cutlist.mjs",
+      "sha256": "c395f49bdb602b29dfc1ea98b7f6d0d5d8781f00eca1c16d009d10e7ef0205be",
+      "bytes": 6381
+    },
+    {
+      "path": "media-use/scripts/lib/duck.mjs",
+      "sha256": "0930aea672a8cb204d344902cb90442491a8979f9f554f9c7c61cd13666a6846",
+      "bytes": 3849
+    },
+    {
+      "path": "media-use/scripts/lib/error-diffusion.mjs",
+      "sha256": "aa718fe95f98087979bab5ea31d68b8e45fbde0c5b874c6888ad21923fb45936",
+      "bytes": 6631
+    },
+    {
+      "path": "media-use/scripts/lib/index-gen.mjs",
+      "sha256": "a837b5319a2e916682293509b1665681479868cf37c222c7014fad071d7d7514",
+      "bytes": 2018
+    },
+    {
+      "path": "media-use/scripts/lib/manifest.mjs",
+      "sha256": "f80d1014fa9597edce87620f91bfd9df03789c4a73b0cdcfe023659bff9cb2ce",
+      "bytes": 10859
+    },
+    {
+      "path": "media-use/scripts/lib/media-fetch.mjs",
+      "sha256": "6a90740eee3e4765b83b4c9726676b2935a7fbc9990f61ad5b166f9263188366",
+      "bytes": 2838
+    },
+    {
+      "path": "media-use/scripts/lib/media-home.mjs",
+      "sha256": "7f69890d7b822f202b44ddec0d8176c767cd8b1da4dfc4d918599c6a05cfecb1",
+      "bytes": 730
+    },
+    {
+      "path": "media-use/scripts/lib/npx-sync.mjs",
+      "sha256": "03346ebeb0e70153050dc5f36f5bafa63807d8e9d823ebf95a4250e9858de6d4",
+      "bytes": 3318
+    },
+    {
+      "path": "media-use/scripts/lib/parakeet-words.mjs",
+      "sha256": "d5b66efe6cb8975beab2f523503113c3be3117e687ebc20695e7ab08c2ba1b4d",
+      "bytes": 1149
+    },
+    {
+      "path": "media-use/scripts/lib/prefs-store.mjs",
+      "sha256": "960429595e5c5dda3f88f2899852d2ac2322a7d26b27ed8139612d0161fff749",
+      "bytes": 7012
+    },
+    {
+      "path": "media-use/scripts/lib/received-env.mjs",
+      "sha256": "7ca608848d08b283e2ecff5e083744b446bd9af57573a884a76bcd22dfb08061",
+      "bytes": 19667
+    },
+    {
+      "path": "media-use/scripts/lib/recipe-store.mjs",
+      "sha256": "55a7f578ce308d0cd3aca5cf878ab70478e4e6c380d662f133b383740e8b3c0f",
+      "bytes": 14342
+    },
+    {
+      "path": "media-use/scripts/lib/telemetry.mjs",
+      "sha256": "b817e192cb6a676db4de3a47058edd858815a0e7fb8d9fb80c150085e9284330",
+      "bytes": 8976
+    },
+    {
+      "path": "media-use/scripts/lib/telemetry.test.mjs",
+      "sha256": "2733285623440cef340ec50e55a6f2d50e330b8122ceef853cf5e670eab6c76e",
+      "bytes": 3078
+    },
+    {
+      "path": "media-use/scripts/lib/terminal-text.mjs",
+      "sha256": "5db8ae7e6b49a64a5b9cf14112074c6a52c14fb2f44e6cfffb883379fbea3054",
+      "bytes": 833
+    },
+    {
+      "path": "media-use/scripts/lib/transcriptCutFade.mjs",
+      "sha256": "ee9c7ec28650cf0f6a0f1f21f1c6a1faa5e152337163cccc0cc9a109b3c99805",
+      "bytes": 911
+    },
+    {
+      "path": "media-use/scripts/lib/windows-exe-search.mjs",
+      "sha256": "6a301aa13e97d3e2e3ba7520c350ebec1b09ecafba24afd6a6866d5c3eb3b10f",
+      "bytes": 640
+    },
+    {
+      "path": "media-use/scripts/lib/words.mjs",
+      "sha256": "bfc1f93523d2fc8ce55580b262efcca537c7feabaf029c1c6f33433591377adb",
+      "bytes": 728
+    },
+    {
+      "path": "media-use/scripts/memory-output.test.mjs",
+      "sha256": "a0c6f53ac97ce71034f6bb397d1f1a359f042be668e28a479af31b2961fb3e1f",
+      "bytes": 7350
+    },
+    {
+      "path": "media-use/scripts/prefs.mjs",
+      "sha256": "11f00db875882d60af0ad8719bb913bcbf0b08ef5f1b32738276806237f51dcd",
+      "bytes": 2469
+    },
+    {
+      "path": "media-use/scripts/recipe.mjs",
+      "sha256": "2c5dfe9649ac6d01ba20e2e5aae33dcb4dcadbd7d8300ec97038feb85b63758e",
+      "bytes": 4170
+    },
+    {
+      "path": "media-use/scripts/resolve-plugin.test.mjs",
+      "sha256": "544098bb4cf0018a4388db365f57ccbb62f9e6e859d23f9d67bb5ee8a71b0748",
+      "bytes": 3299
+    },
+    {
+      "path": "media-use/scripts/resolve.mjs",
+      "sha256": "e4e78ab49d6006c7deae9030d520a7a4238dfbef1976ce219e219b64f8e4247b",
+      "bytes": 1400
+    },
+    {
+      "path": "media-use/scripts/transcribe.mjs",
+      "sha256": "e6251bfee1a49680892ea9c5e25b412a85a33e9e96e3ff4ed10fc0a2dd99695d",
+      "bytes": 8303
+    },
+    {
+      "path": "media-use/scripts/transcribe.test.mjs",
+      "sha256": "3cc6c20225f6f2d38abc7e0eb6d14fefc6e2fc5bb7ff827bb6019b6fccf42ca1",
+      "bytes": 7912
+    },
+    {
+      "path": "media-use/scripts/transcript-cut.mjs",
+      "sha256": "c5b1177a04eb70fbc55a0cadde3f650098c2ed68ed6abb00e5f9677044bcb077",
+      "bytes": 10447
+    },
+    {
+      "path": "media-use/scripts/transcript-cut.test.mjs",
+      "sha256": "af546cd7d473eb5f4258148a8dd8ec637a67a242cd50948abe1e0dcd6f64c527",
+      "bytes": 9849
+    }
+  ]
+}
