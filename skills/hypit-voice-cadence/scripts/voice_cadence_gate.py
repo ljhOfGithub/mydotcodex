@@ -28,6 +28,14 @@ def duration(path):
     result = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'json', str(path)], capture_output=True, text=True, check=True)
     return float(json.loads(result.stdout)['format']['duration'])
 
+def explicit_approval_quote(quote):
+    if not isinstance(quote, str):
+        return False
+    original_speed_reply = quote.strip() in ('可以原速保留', '已听完整轨，可以原速保留')
+    positive = original_speed_reply or any(word in quote for word in ('可以保留','按原速保留','接受','认可','通过','满意'))
+    negative = any(word in quote for word in ('不够激动','还是像人机','还有一句需要调整','还有问题','不可以','不接受','不认可','不通过','不满意'))
+    return positive and not negative
+
 def validate(path, video_sha256=None, stage='delivery'):
     path = Path(path)
     report = json.loads(path.read_text())
@@ -91,7 +99,7 @@ def validate(path, video_sha256=None, stage='delivery'):
     approval = json.loads(bind(report['full_audio_approval']).read_text())
     need(approval.get('source')=='actual_user_reply' and approval.get('audio_sha256')==sha(audio) and approval.get('entire_audio_listened') is True and bool(approval.get('exact_quote','').strip()), '必须先给用户完整音轨试听并保存真实认可，不能只交前三句')
     quote=approval['exact_quote']
-    need(any(word in quote for word in ('可以保留','按原速保留','接受','认可','通过','满意')) and not any(word in quote for word in ('不够激动','还是像人机','还有一句需要调整','还有问题','不可以','不接受','不认可','不通过','不满意')), '模糊改善或用户指出的问题不能当成认可')
+    need(explicit_approval_quote(quote), '模糊改善或用户指出的问题不能当成认可')
     result={'status':'VOICE_READY','audio_sha256':sha(audio),'sentences':len(sentences),'generation_groups':len(groups),'source_duration':source_duration,'output_duration':output_duration,'duration_deviation':drift,'opening_duration_deviation':opening_drift,'tempo_rate':1.0,'scope':'材料、实际时长及生成链核验；不代替真实听检，不宣称逐音节复制。'}
     if stage=='delivery':
         video=bind(report['actual_video'])
