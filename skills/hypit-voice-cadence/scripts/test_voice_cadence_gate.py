@@ -110,6 +110,14 @@ class Tests(unittest.TestCase):
     def test_improvement_does_not_mean_approval(self):
         self.report['full_audio_approval']=self.obj('improvement.json',{'source':'actual_user_reply','audio_sha256':gate.sha(self.full),'entire_audio_listened':True,'exact_quote':'感觉好多了，你怎么做的'})
         with self.assertRaises(ValueError):self.run_gate()
+    def test_explicit_original_speed_reply_is_accepted_without_rewriting_quote(self):
+        quote='已听完整轨，可以原速保留'
+        self.report['full_audio_approval']=self.obj('original-speed.json',{'test_fixture':True,'source':'actual_user_reply','audio_sha256':gate.sha(self.full),'entire_audio_listened':True,'exact_quote':quote})
+        self.assertEqual(self.run_gate('voice_ready')['status'],'VOICE_READY')
+        self.assertEqual(json.loads((self.root/'original-speed.json').read_text())['exact_quote'],quote)
+    def test_original_speed_reply_still_requires_full_audio_listening(self):
+        self.report['full_audio_approval']=self.obj('not-listened.json',{'test_fixture':True,'source':'actual_user_reply','audio_sha256':gate.sha(self.full),'entire_audio_listened':False,'exact_quote':'可以原速保留'})
+        with self.assertRaises(ValueError):self.run_gate('voice_ready')
     def test_explicit_duration_change_can_be_bound(self):
         self.report['segments'][2]['output_window'][1]=.36;self.report['segments'][3]['output_window'][0]=.36
         self.report['duration_exception']=self.obj('duration-approval.json',{'source':'actual_user_reply','duration_change_explicitly_approved':True,'exact_quote':'合成夹具：允许片头加长到0.36秒。'})
@@ -123,5 +131,16 @@ class Tests(unittest.TestCase):
     def test_stale_hash(self):
         self.script.write_text('改了内容')
         with self.assertRaises(ValueError):self.run_gate()
+
+class ApprovalQuoteTests(unittest.TestCase):
+    def test_clear_original_speed_choices(self):
+        for quote in ['可以原速保留','已听完整轨，可以原速保留','  已听完整轨，可以原速保留  ']:
+            with self.subTest(quote=quote):self.assertTrue(gate.explicit_approval_quote(quote))
+    def test_new_phrase_does_not_accept_hope_questions_or_qualification(self):
+        for quote in ['希望可以原速保留','可以原速保留吗','没有听完整轨，可以原速保留','已听完整轨，可以原速保留，但还有问题','已听完整轨，不可以原速保留',None]:
+            with self.subTest(quote=quote):self.assertFalse(gate.explicit_approval_quote(quote))
+    def test_prior_clear_approval_and_negative_feedback_unchanged(self):
+        self.assertTrue(gate.explicit_approval_quote('完整听完，按原速保留。'))
+        self.assertFalse(gate.explicit_approval_quote('不够激动，不过按原速保留。'))
 
 if __name__=='__main__':unittest.main(verbosity=2)
