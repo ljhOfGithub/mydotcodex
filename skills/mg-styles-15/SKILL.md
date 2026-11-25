@@ -5,7 +5,7 @@ description: 从 15 种代码生成的 MG 动态设计风格中选择适合内�
 
 # MG Styles 15
 
-视频只要使用 MG 动画，先执行[通用动效骨架硬门](../_references/MG通用动效骨架硬门.md)：选择并实际改编有来源的通用骨架，逐镜记录动作结构、源码方法与当前实现。只借配色或列风格名不算；骨架服从真实内容、原片效果、已批准原速声音与当前指定引擎。
+视频只要使用 MG 动画，先执行[通用动效骨架硬门](../_references/MG通用动效骨架硬门.md)：从 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15/tree/main)、[Hyperframes 通用案例](https://github.com/heygen-com/hyperframes/tree/main/registry/examples) 或同类来源选择并实际改编骨架；短特效可参考 [video-shotcraft 镜头配方](https://vincentwei1021.github.io/video-shotcraft/)。逐镜记录来源版本、动作结构、源码方法、当前实现及时窗。只借配色或列风格名不算；骨架服从真实内容、原片效果、指定原速声音与当前引擎，不因参考库的技术栈换引擎。
 
 本 skill 是对 [Vincentwei1021/mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15) 的本地个人入口。上游以 MIT 许可公开 15 套完整提示词、10 秒样片和源码，但当前没有原生 `SKILL.md`；这里不复制其大体积样片和资产，只保存选型与验收规则，并在需要时读取准确的上游提示词。
 
