@@ -2,6 +2,10 @@
 name: ai-talking-head-production-pipeline
 description: 把 AI/科技选题或已有中文口播原片组织成可复用的端到端短视频生产流程，覆盖原创脚本、拍摄交接、本地转写、删停顿、本人音色重配、普通话清晰化、B-roll 规划、剪映或 Premiere 精修、自然转场、独立导出和逐点验收。也适用于把构图简单的真人口播升级为包含人物缩放、信息主画布、透明动画和独立封面的动态成片。适用于用户要从选题做到成片、批量稳定生产口播视频，或修复只有插图硬切但缺少剪辑感的成片；不用于未经授权的发布、购买会员或把草稿冒充已交付视频。
 ---
+## 声音免审核（当前工作区默认）
+
+执行[声音免审核门](../_references/声音免审核门.md)：不再要求声音试听、A/B、开头逐句、声线／情绪／音质审核或用户声音批准，不以听审缺失阻塞制作和交付。只保留音轨存在、完整解码和指定原速的基本文件检查；转写可用于字幕定位。下面旧的声音评审或试听前置不再执行；视觉检查、制作参数及当前用户明确指定的声线仍保留。
+
 
 # AI 口播成片生产流水线
 
@@ -12,7 +16,7 @@ description: 把 AI/科技选题或已有中文口播原片组织成可复用的
 - 只有主题或想追热点：先使用 `ai-hot-video-script-collector`，得到有来源映射的原创口播稿。
 - 已有稿件但还没拍：交付拍摄版稿件，标出停顿、重音、可插画面和预计时长；不要直接假设已经有原片。
 - 已有原片：从媒体体检、本地转写和剪辑设计开始。
-- 已有原片且希望不靠本人训练来改善普通话、语气或语速：先读取 [references/local-voice-redub.md](references/local-voice-redub.md)。首次合作先交付同内容、同响度的短段 A/B 试听；用户已经建立持久声音默认时，后续完整成片直接沿用该选择，不得静默退回原声。
+- 已有原片且希望不靠本人训练来改善普通话、语气或语速：先读取 [references/local-voice-redub.md](references/local-voice-redub.md)。首次合作也直接按已选声线生成，不要求 A/B 试听；用户已经建立持久声音默认时，后续完整成片直接沿用该选择，不得静默退回原声。
 - 只有一条构图简单的真人口播、希望升级为动态成片：先读取 [references/simple-talking-head-dynamic-editing.md](references/simple-talking-head-dynamic-editing.md)，按其中的录制输入、语义配画、布局状态机和 Premiere/剪映路线执行。
 - 用户要求“更成熟”“减少模板感”“按专业短视频审美继续精修”，或需要解决留白、静态信息页、标题常驻、转场叠影与手机端可读性时，必须读取 [references/editorial-aesthetic-qa.md](references/editorial-aesthetic-qa.md)。
 - 使用 ChatCut 数字人、真实软件录屏、Remotion 或 HyperFrames 制作教程型口播，或用户要求对标参考博主的数字人教程时，必须读取 [references/chatcut-remotion-digital-human.md](references/chatcut-remotion-digital-human.md)。该参考同时规定 Credits 边界、人物状态、参考片对标和逐帧验收门槛。

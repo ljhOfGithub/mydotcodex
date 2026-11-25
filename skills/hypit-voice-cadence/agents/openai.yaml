@@ -1,4 +1,4 @@
 interface:
-  display_name: "Hypit 原片节奏配音"
-  short_description: "按参考片逐句节奏生成本人配音，完整试听认可后原速配回并核验采样"
-  default_prompt: "用 $hypit-voice-cadence 为 Hypit 复刻视频按原片节奏生成本人旁白，并完成整轨听审和成片保真门。"
+  display_name: "Hypit 旁白制作"
+  short_description: "按指定声线原速生成和配回，不进行声音审核或审批"
+  default_prompt: "用 $hypit-voice-cadence 为 Hypit 视频生成指定本人旁白并原速配回，保留基础文件完整性，不做声音试听、A/B或审批。"

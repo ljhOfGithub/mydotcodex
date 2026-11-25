@@ -1,3 +1,5 @@
+当前声音流程：[声音免审核门](../../_references/声音免审核门.md)。以下涉及试听、A/B、主观音质/情绪审核的旧要求不执行；生成、字幕定位、素材授权和文件完整性要求保留。
+
 # 模型检索与个人音色配置
 
 本指南从一个已 `init` 的动画项目根目录执行，工具在 `tools/voice.py`。直接在 skill 根目录执行时将 `tools/voice.py` 替换为 `scripts/voice.py`。旧项目不会自动更新：可以直接用新版 skill 的脚本，`--project` 指向旧项目的新版本目录。
@@ -91,7 +93,7 @@ ffmpeg -i /path/to/your-recording.m4a -ss 1.2 -t 15 \
   -ac 1 -ar 24000 -c:a pcm_s16le .voice-local/voices/my-voice/reference.wav
 ```
 
-把 `-ss` 和 `-t` 改成实际句子边界，不能机械照用这两个数字。扩展名叫 wav 不代表实际为 PCM；命令会执行真正转换。将该片段**实际说出的每个字**保存为 UTF-8 `reference.txt`，试听核对后，把 `referenceTextVerified` 改为 `true`。不要把预先拟定但没有照读的稿子直接当参考文字。
+把 `-ss` 和 `-t` 改成实际句子边界，不能机械照用这两个数字。扩展名叫 wav 不代表实际为 PCM；命令会执行真正转换。将该片段**实际说出的每个字**保存为 UTF-8 `reference.txt`，该字段只保留为历史元信息，不再要求试听核对或手动勾选。不要把预先拟定但没有照读的稿子直接当参考文字。
 
 可用录音文案：“最近，我在尝试把脑子里的想法做成动画。给它一个主题，它会先写剧本，再根据内容推荐画风，最后生成带声音的视频。”
 
@@ -124,9 +126,9 @@ python3 tools/voice.py check --config .voice-local/voice.local.json --voice my-v
 
 输出 WAV 和同名 `.wav.json`，记录模型版本、参考素材哈希、参数、时长与网络尝试，不把参考录音路径和逐字稿写入旁车。脚本设置 HF/Transformers offline 并阻止 Python socket.connect；遇到缺依赖、缺 tokenizer 或权重错误会失败，不自动联网补下载或上传音频。模型仍需已有的本地依赖才能运行。
 
-试听音色、漏字、重复、停顿；技术检查不能代替主观判断。音量做静态峰值归一化至 -3 dBFS；视频最终响度由 `mix` 处理。第二次试音用 `take-02.wav`，命令拒绝覆盖旧文件。
+声音免审核，不要求试听音色、漏字、重复或停顿。音量做静态峰值归一化至 -3 dBFS；视频最终响度由 `mix` 处理。第二次试音用 `take-02.wav`，命令拒绝覆盖旧文件。
 
-新建音色可先试听再调整；已经配置默认音色就直接使用。确认 `film.json` 已是最终台词，在**尚无同名配音的新版本工程**中按镜头生成：
+直接使用当前指定音色。确认 `film.json` 已是最终台词，在**尚无同名配音的新版本工程**中按镜头生成：
 
 ```sh
 python3 tools/pipeline.py tts .

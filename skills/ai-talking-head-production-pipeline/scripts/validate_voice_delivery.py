@@ -42,8 +42,6 @@ def validate(payload: dict[str, Any]) -> list[str]:
             )
 
     if voice_mode == "redub":
-        if payload.get("selected_candidate") != "B_natural":
-            errors.append("selected_candidate must be B_natural for this workspace default")
         for key in ("reference_audio", "final_audio", "transcript_json", "subtitle_file"):
             _require_file(payload, key, errors)
         if not isinstance(payload.get("model"), str) or not payload["model"].strip():
@@ -54,9 +52,6 @@ def validate(payload: dict[str, Any]) -> list[str]:
     if payload.get("status") == FINAL_STATUS and lip_status not in VALID_LIP_SYNC:
         errors.append("final-verified delivery requires lip_sync.status checked or covered")
 
-    for key in ("loudness_lufs", "true_peak_dbtp"):
-        if not isinstance(payload.get(key), (int, float)):
-            errors.append(f"{key} must be numeric")
     return errors
 
 

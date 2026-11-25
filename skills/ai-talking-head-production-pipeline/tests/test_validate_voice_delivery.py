@@ -44,3 +44,10 @@ def test_final_delivery_requires_lip_sync_check(tmp_path: Path) -> None:
     payload = _complete_payload(tmp_path)
     payload["lip_sync"] = {"status": "not_synced"}
     assert any("lip_sync.status" in error for error in MODULE.validate(payload))
+
+
+def test_no_audition_selection_or_loudness_score_required(tmp_path: Path) -> None:
+    payload = _complete_payload(tmp_path)
+    for key in ("selected_candidate", "loudness_lufs", "true_peak_dbtp"):
+        payload.pop(key)
+    assert MODULE.validate(payload) == []

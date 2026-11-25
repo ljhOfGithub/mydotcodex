@@ -13,6 +13,10 @@ description: >
   (branded-ad-edit, cinematic edits). Produces audited audio files + mix numbers;
   voiceover generation and clip placement live in the edit skills.
 ---
+## 声音免审核（当前工作区默认）
+
+执行[声音免审核门](../_references/声音免审核门.md)：不再要求声音试听、A/B、开头逐句、声线／情绪／音质审核或用户声音批准，不以听审缺失阻塞制作和交付。只保留音轨存在、完整解码和指定原速的基本文件检查；转写可用于字幕定位。下面旧的声音评审或试听前置不再执行；视觉检查、制作参数及当前用户明确指定的声线仍保留。
+
 
 # Sound Design
 
@@ -185,30 +189,9 @@ Order of operations matters — every ratio below assumes step 1 happened first.
    - **One biggest swell per video** (usually the opener sub-drop or the final
      reveal). If everything is big, nothing is.
 
-## 5. Verify the mix — in dB, never by ear alone
+## 5. 音轨基础文件检查（免审核）
 
-Every audio bug ever caught in this pipeline was found by measuring, not listening.
-
-```bash
-# window around a hit (hit at t=12.4, file 0.8s): start ~0.05s early
-ffmpeg -ss 12.35 -t 0.9 -i final.mp4 -af volumedetect -f null -
-
-# a quiet window — a word gap with no hits and no big VO peak
-ffmpeg -ss 8.0 -t 0.8 -i final.mp4 -af volumedetect -f null -
-
-# integrated loudness of the master
-ffmpeg -i final.mp4 -af ebur128 -f null -    # read the final "I:" line
-```
-
-Expectations:
-
-- A hit window whose peak **matches the VO's peaks** is *audible-subtle*; **+3–5dB
-  over** is *punchy*. A hit window that measures the same as the quiet window means
-  the hit is missing or buried — fix placement or volume.
-- The quiet window should sit a few dB above the same window in a no-music render
-  (the bed is present) but far below VO peaks (the bed isn't competing).
-- **Integrated loudness target: ~−14 to −13 LUFS.** Much below −14, the whole mix is
-  quiet for social feeds; above ~−12, the limiter is doing the mixing for you.
+按当前指定音乐、音效及音量参数制作，不额外运行响度、音高、RMS、试听或声音评分。只核音轨存在、完整解码，以及明确指定的原音是否原速使用。使用 `../_references/voice_review_policy.py` 的 `basic_audio`；它不产生听审或用户声音批准。
 
 ## Files
 

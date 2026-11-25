@@ -2,6 +2,10 @@
 name: ai-audio-sound-design
 description: Rebuild the audio of an AI-generated video (Arcads / AI actors / UGC-gen / any clip whose voices sound like sterile studio AI) so every scene sounds like it was really filmed in the location shown — location-matched ambience beds, room-matched convolution reverb, outdoor distance treatment, censor bleeps over swears, removal of the AI high-frequency watermark whine, and a social loudness master, all with the video stream untouched. Use whenever someone says clips "sound AI / fake / sterile / like a voiceover", asks to "add ambient sounds / background noise", "make it sound like the location they're in", "add reverb to match the room", "bleep the swears / curse words", or hands over AI-actor footage for an audio pass — even if they never say "sound design". Also for revision rounds on an existing pass ("make the lawnmower louder", "add a car driving by", "make it sound like it's outside"). NOT for captions (embedded-captions), cutting footage (reel-recut), or full branded motion-graphic edits (branded-ad-edit).
 ---
+## 声音免审核（当前工作区默认）
+
+执行[声音免审核门](../_references/声音免审核门.md)：不再要求声音试听、A/B、开头逐句、声线／情绪／音质审核或用户声音批准，不以听审缺失阻塞制作和交付。只保留音轨存在、完整解码和指定原速的基本文件检查；转写可用于字幕定位。下面旧的声音评审或试听前置不再执行；视觉检查、制作参数及当前用户明确指定的声线仍保留。
+
 
 # AI Audio Sound Design
 
