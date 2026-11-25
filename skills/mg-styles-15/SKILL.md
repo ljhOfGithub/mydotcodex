@@ -5,13 +5,15 @@ description: 从 15 种代码生成的 MG 动态设计风格中选择适合内�
 
 # MG Styles 15
 
+视频只要使用 MG 动画，先执行[通用动效骨架硬门](../_references/MG通用动效骨架硬门.md)：选择并实际改编有来源的通用骨架，逐镜记录动作结构、源码方法与当前实现。只借配色或列风格名不算；骨架服从真实内容、原片效果、已批准原速声音与当前指定引擎。
+
 本 skill 是对 [Vincentwei1021/mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15) 的本地个人入口。上游以 MIT 许可公开 15 套完整提示词、10 秒样片和源码，但当前没有原生 `SKILL.md`；这里不复制其大体积样片和资产，只保存选型与验收规则，并在需要时读取准确的上游提示词。
 
 ## 工作流
 
 1. 先读 [references/style-index.md](references/style-index.md)，按内容功能选择最多两种候选风格。普通教程默认只选择一种主风格。
 2. 打开对应上游 `prompts/<style>.md`，完整读取输出规格、技术路线、Creative seed 和 Signature features。
-3. 只替换 Creative seed 中的故事、品牌、文案、配色、画幅和时长；保留决定风格识别度的 Signature features。
+3. 读取所选 demos 源码，实际复用或明确适配通用动作结构与可用方法，登记文件／函数、保留关系和本片镜头落点；不能仅仿配色。再替换 Creative seed 中的故事、品牌、文案、配色、画幅和时长；保留决定风格识别度的 Signature features。
 4. 先制作 5–10 秒样片。没有样片或参考帧时，不直接扩展到 60 秒完整成片。
 5. 用上游 `rubric.md` 或项目的 `video-qa` 做独立评审；至少完成“制作 → 评审 → 修改”一轮。用户要求对标专业创作者时做两轮。
 6. 在报告中说明实际渲染器。使用 Remotion、HTML/Canvas、WebGL 或 Blender 时分别如实标注，不把风格提示词说成渲染器。

@@ -18,6 +18,8 @@ description: >
 
 # video-edit-pipeline — master orchestration
 
+视频只要使用 MG 动画，先执行[通用动效骨架硬门](../_references/MG通用动效骨架硬门.md)：选择并实际改编有来源的通用骨架，逐镜记录动作结构、源码方法与当前实现。只借配色或列风格名不算；骨架服从真实内容、原片效果、已批准原速声音与当前指定引擎。
+
 You are running the proven end-to-end pipeline that turns raw talking-head
 footage into a finished, reviewed, shipped short-form video. This skill does
 not do the editing itself — it sequences the specialist skills and enforces
