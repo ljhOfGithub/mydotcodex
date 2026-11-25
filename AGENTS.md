@@ -4,7 +4,7 @@
 
 ## MG 通用动效骨架硬门（2026-11-26）
 
-- 所有视频只要使用 MG 动画，先选用并实际改编 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15/tree/main) 或同类通用动效骨架，强制执行[MG通用动效骨架硬门](</Users/jackie/Documents/ChatGPT/远程管理/MG通用动效骨架硬门.md>)。记录来源版本、动作结构、源码方法与每个 MG 镜头的实现及时窗；仅借配色或写“参考风格”不算复用。骨架服从内容、真实案例、原速声音、原片效果与用户指定引擎；不扩张检查，不重复审批未变内容。
+- 所有视频只要使用 MG 动画，先选用并实际改编 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15/tree/main)、[Hyperframes 通用案例](https://github.com/heygen-com/hyperframes/tree/main/registry/examples) 或同类通用动效骨架；短特效可参考 [video-shotcraft](https://vincentwei1021.github.io/video-shotcraft/) 的具体镜头配方，强制执行[MG通用动效骨架硬门](</Users/jackie/Documents/ChatGPT/远程管理/MG通用动效骨架硬门.md>)。记录来源版本、动作结构、源码方法与每个 MG 镜头的实现及时窗；仅借配色或写“参考风格”不算复用。骨架服从内容、真实案例、原速声音、原片效果与用户指定引擎；不扩张检查，不重复审批未变内容。
 
 改动要小，方便审查
 动手前先说文件和计划

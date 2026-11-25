@@ -9,6 +9,8 @@ description: 把 GitHub 开源项目制作成项目介绍或使用演示视频�
 
 # GitHub2Video
 
+视频只要使用 MG 动画，先执行[通用动效骨架硬门](../_references/MG通用动效骨架硬门.md)：从 [mg-styles-15](https://github.com/Vincentwei1021/mg-styles-15/tree/main)、[Hyperframes 通用案例](https://github.com/heygen-com/hyperframes/tree/main/registry/examples) 或同类来源选择并实际改编骨架；短特效可参考 [video-shotcraft 镜头配方](https://vincentwei1021.github.io/video-shotcraft/)。逐镜记录来源版本、动作结构、源码方法、当前实现及时窗。只借配色或列风格名不算；骨架服从真实内容、原片效果、指定原速声音与当前引擎，不因参考库的技术栈换引擎。
+
 把仓库链接变成事实有依据、观众看得懂、工程可继续编辑的介绍视频。默认由 **Hypit** 完成主体时间线、素材和声音编排；用户当次指定其他工具时服从当次要求。案例只是输入，不把某个补丁、命令行工具或 AI 项目变成所有视频的固定主题。
 
 ## 启动与恢复
