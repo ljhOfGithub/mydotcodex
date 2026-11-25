@@ -7,71 +7,23 @@ description: >-
   loudness (LUFS) or clipping problems, confirm a fix after a re-render, or build an
   inspection packet (contact sheet + waveform + transcript) for a suspect timestamp.
   L1 = ffmpeg/ffprobe technical checks, L2 = transcript edit-boundary checks mapped through
-  the EDL, L3 = optional Gemini watch+listen pass on a 480p proxy, L4 = targeted inspection
+  the EDL, L3 = visual review under the current no-voice-review policy, L4 = targeted inspection
   packets. Needs only ffmpeg/ffprobe; whisper and GEMINI_API_KEY unlock the deeper layers.
 ---
+## 声音免审核（当前工作区默认）
+
+执行[声音免审核门](../_references/声音免审核门.md)：不再要求声音试听、A/B、开头逐句、声线／情绪／音质审核或用户声音批准，不以听审缺失阻塞制作和交付。只保留音轨存在、完整解码和指定原速的基本文件检查；转写可用于字幕定位。下面旧的声音评审或试听前置不再执行；视觉检查、制作参数及当前用户明确指定的声线仍保留。
+
 
 # video-qa — 4-layer QA for rendered video edits
 
-A finished render is an **audio + video artifact** — roughly half of real editing mistakes
-are audible, not visible (a live post-mortem on a shipped branded edit found 6 audible seam
-flubs that stills-only QA missed). This skill QAs an edit without screenshot sweeps by
-spending compute cheap → expensive:
+当前检查只执行视觉验收、字幕核对与基础音轨文件检查。不要直接运行旧 `qa:video` 音频层：其静音、RMS、响度、剪点听审和带声音语义模型已从默认流程移除。需要使用旧工具时，只调用独立的画面或分镜检查入口；没有可用的仅视觉入口就按以下实际检查执行，不伪造工具通过。
 
-```
-CHEAP    L1  ffprobe/ffmpeg technical (blackdetect, freezedetect, flash frames,
-             decode errors, duration-vs-intent, silencedetect + RMS envelope,
-             LUFS via ebur128, clipping)
-         L2  transcript edit-boundary checks on EVERY dialogue cut
-             (clipped words, duplicate phrases, seam dead-air, caption coverage,
-             butt-splice clicks) + isolated seam re-probes
-         L3  a multimodal model watches AND listens to a 480p proxy (audio intact),
-             5fps sampling, enforced JSON — tells you WHERE to look (optional)
-EXPENSIVE L4 inspection packets: contact sheet + marked waveform + word-level
-             transcript + audio stats for one window — verify before changing an edit
-```
-
-## Run the engine first (`tools/video-qa`)
-
-The procedure below is implemented as a standalone node package. Install once
-(`npm --prefix tools/video-qa install`), then:
-
-```bash
-# reel-recut lane — the manifest build_reel.py dumps next to the spec, + SOURCE-time words
-npm --prefix tools/video-qa run qa:video -- --manifest <p>/spec.qa-manifest.json --words <p>/transcript.json
-
-# hyperframes lane — the picture-lock EDL + OUTPUT-time words (+ optional placement manifest)
-npm --prefix tools/video-qa run qa:video -- --lane hyperframes --video <p>/out.mp4 \
-    --edl <p>/edl.json --words <p>/words-master.json --words-are-output [--placement <p>/preview/manifest.json]
-
-# any mp4, no edit intent — L1 + L3 only
-npm --prefix tools/video-qa run qa:video -- --video <p>/out.mp4
-
-# a Layer-4 inspection packet for one window
-npm --prefix tools/video-qa run qa:inspect -- --manifest <p>/spec.qa-manifest.json --start 31.5 --end 33.0
-
-# check every planned graphic, then collect actual-render evidence
-npm --prefix tools/video-qa run qa:storyboard -- --storyboard <p>/storyboard.json \
-    --html <p>/composition.html --video <p>/out.mp4
-
-# enforce completed technical + transcript checks before delivery
-npm --prefix tools/video-qa run qa:video -- --manifest <p>/spec.qa-manifest.json \
-    --require-layers technical,transcript
-```
-
-Flags: `--skip-semantic` (no Gemini), `--fps N`, `--instructions file.txt` (the original
-brief, given to Gemini), `--no-cache`, `--out dir`, `--json`. Exit **0** PASS · **1**
-PASS_WITH_WARNINGS · **2** FAIL. Reports land in `<video dir>/_qa/<stem>/qa-report.{md,json}`
-with packets under `inspect/<issue-id>/`. Relative paths resolve from the directory you ran
-the command in; `.env` is read from there first, then from this pack's root. Full flag and
-environment reference: `tools/video-qa/README.md`.
-
-Coverage is explicit in the JSON/Markdown report. Missing or degraded optional layers
-produce PASS_WITH_WARNINGS; unavailable required layers produce FAIL. Technical is required
-by default. `--skip-semantic` is supported and its unavailable coverage is shown. Layer
-failures preserve the completed layers in a partial report. Cache fingerprints include
-effective instructions, semantic FPS, thresholds, transcript configuration and source-file
-identity; degraded/skipped layers are retried, not cached.
+1. 用 ffprobe 核对规格、音轨存在、帧数与时长，用 ffmpeg 完整解码。
+2. 按当前视频每0.5秒及末帧取图并OCR，核对当前文字、边界、遮挡、单字幕和镜头接续。
+3. 正常速度检查实际视频的动作、节奏、正文推进与完整播放；独立视觉审片仍执行。不上传带声音代理片作声音审核。
+4. 音轨使用 `../_references/voice_review_policy.py` 的 `basic_audio`，指定源音时提供 `source_audio`；没有声音批准记录不阻塞交付。ASR仅作字幕定位。
+5. 记录实际覆盖、当前文件哈希、发现的问题和修复；技术、视觉、用户认可分开。以下旧音频审查经验仅保留为历史，不是当前任务或前置。
 
 ## Storyboard completeness
 
@@ -229,8 +181,7 @@ rounds**, then stop and escalate. Never loop on LOW or subjective issues.
   gaps in a shipped edit were only found by the envelope scan. See L1 reference.
 - **One muxed audio stream does not prove clean dialogue.** Two voices, duplicated narration,
   room echo, or a bad source splice may already be baked into one AAC/PCM stream. Treat a
-  single-stream `ffprobe` result only as a routing check; still listen to the full master and
-  inspect every source-change window with a local waveform/RMS view and isolated playback.
+  single-stream `ffprobe` result only as a routing check; 当前仅核对音轨存在、完整解码和指定原速，不执行全片听审或局部波形/RMS声音审核。
   Do not close an echo or overlap report from stream count alone.
 - Silence-derived cuts (a cut whose removed region was measured silence) cannot clip
   audible speech — word "overlap" there is whisper end-padding. 40 of 49 cuts false-flagged

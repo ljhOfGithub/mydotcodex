@@ -10,6 +10,7 @@ from unittest.mock import patch
 import wave
 import voice_cadence_gate as gate
 
+@unittest.skip('旧声音审核已取消；改由test_voice_review_policy回归基础文件检查')
 class Tests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
@@ -132,6 +133,7 @@ class Tests(unittest.TestCase):
         self.script.write_text('改了内容')
         with self.assertRaises(ValueError):self.run_gate()
 
+@unittest.skip('旧声音审核已取消；改由test_voice_review_policy回归基础文件检查')
 class ApprovalQuoteTests(unittest.TestCase):
     def test_clear_original_speed_choices(self):
         for quote in ['可以原速保留','已听完整轨，可以原速保留','  已听完整轨，可以原速保留  ']:

@@ -2,6 +2,10 @@
 name: video-shotcraft
 description: Create cinematic product videos from shot recipe cards, a validated template, and code/audio assets (Remotion + real page screenshots + 2.5D camera moves + beat-synced cuts + sound design). Use when the user asks to turn a frontend project or webpage into a product video, says "use video-shotcraft to make a video/promo", names the Ink Press template or asks to reproduce its effect, or wants a single shot card's motion. 用镜头配方卡 + 已验收模板 + 代码/音频资产制作电影感产品视频（Remotion + 真实页面截图 + 2.5D 运镜 + 节奏卡点 + 声音设计）。当用户要求"用 video-shotcraft 做视频/宣传片"、把前端项目/网页做成产品视频、点名 Ink Press 模板或要求复刻模板片效果，或要用镜头卡做单个动效镜头时使用。
 ---
+## 声音免审核（当前工作区默认）
+
+执行[声音免审核门](../_references/声音免审核门.md)：不再要求声音试听、A/B、开头逐句、声线／情绪／音质审核或用户声音批准，不以听审缺失阻塞制作和交付。只保留音轨存在、完整解码和指定原速的基本文件检查；转写可用于字幕定位。下面旧的声音评审或试听前置不再执行；视觉检查、制作参数及当前用户明确指定的声线仍保留。
+
 
 # video-shotcraft：电影感产品视频制作
 
@@ -243,7 +247,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
   glass fluid crowd counter），找音先进类别目录，清单见 sound-design.md。
   词汇表 sparkle 的目录名是 `light/`（无 `sparkle/`）；S1 禁音色不禁动作——
   画面真有点击/开关就该配拟音，但 `ui/` 里一半是合成反馈音（tone/bleep/
-  notification）需逐个试听、不可整目录放行（名单见 sound-design 3.3）；
+  notification）按已选素材使用，不再要求逐个试听审核（名单见 sound-design 3.3）；
   长样本与轻音素材各有名单需特殊处理（sound-design 4.1）。
 - `demos/` 各卡实现源码：自包含的成片级 demo（共享件在 `demos/_fixtures/`：`Look.tsx` 视觉系统、
   `Polish.tsx` 质感件、`Brand.tsx` 品牌件等，个别 import `demos/_textures/` 的真实页面纹理），

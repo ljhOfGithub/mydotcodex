@@ -71,8 +71,7 @@ def load_config(path, voice_id=None):
     location = c.get('models', {}).get(model['id'])
     if not location:
         raise ValueError(f'没有配置模型路径：{model["id"]}')
-    if voice.get('referenceTextVerified') is not True:
-        raise ValueError('先核对参考录音与文字，再设置 referenceTextVerified=true')
+    # 声音免审核：参考文字作为模型输入，不要求人为试听勾选。
     allowed_voice = {'label', 'model', 'referenceAudio', 'referenceTextFile', 'referenceTextVerified', 'language'}
     if set(voice) - allowed_voice:
         raise ValueError(f'不支持的音色字段：{sorted(set(voice)-allowed_voice)}')
