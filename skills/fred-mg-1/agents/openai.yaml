@@ -1,0 +1,6 @@
+interface:
+  display_name: "fred mg 1"
+  short_description: "复用个人黑白紫MG骨架，使用23场景模板、真实媒体槽和独立进度节点"
+  default_prompt: "使用 $fred-mg-1 制作这段内容，复用已有动作骨架并替换当前文案、数据和真实素材。"
+policy:
+  allow_implicit_invocation: true
